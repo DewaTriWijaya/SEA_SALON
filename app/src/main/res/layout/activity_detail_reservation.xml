@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Name"
+        android:text="@string/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rv_reference" />
 
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Phone"
+        android:text="@string/phone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginTop="8dp"
-        android:text="Service"
+        android:text="@string/service"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone" />
 
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Date"
+        android:text="@string/date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/service" />
 
@@ -70,9 +70,9 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dewa Tri Wijaya"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/name" />
+        app:layout_constraintTop_toTopOf="@+id/name"
+        tools:text="Dewa Tri Wijaya" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -85,23 +85,24 @@
         android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="085746785678"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/phone" />
+        app:layout_constraintTop_toTopOf="@+id/phone"
+        tools:text="085746785678" />
 
     <TextView
         android:id="@+id/tvService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Haircut Dan Styling"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/service" />
+        app:layout_constraintTop_toTopOf="@+id/service"
+        tools:text="Haircut Dan Styling" />
 
     <ImageButton
         android:id="@+id/btnDate"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="@drawable/background_date"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/icon_date"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/tvDate" />
@@ -111,7 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="00/00/0000"
+        android:text="@string/_00_00_0000"
         app:layout_constraintBottom_toBottomOf="@+id/btnDate"
         app:layout_constraintStart_toEndOf="@+id/btnDate"
         app:layout_constraintTop_toTopOf="@+id/btnDate" />
@@ -121,7 +122,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Time"
+        android:text="@string/time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnDate" />
 
@@ -141,7 +142,7 @@
         android:id="@+id/btnReservation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reservation"
+        android:text="@string/reservation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

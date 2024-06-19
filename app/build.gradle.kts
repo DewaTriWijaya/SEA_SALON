@@ -62,4 +62,7 @@ dependencies {
 
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.1")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.1")
+
+    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation ("com.google.zxing:core:3.3.3")
 }

@@ -2,6 +2,7 @@ package com.dewa.sea.ui.reservation.detail
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,8 +16,10 @@ import com.dewa.sea.data.model.DataReferences.itemFT
 import com.dewa.sea.data.model.DataReferences.itemMP
 import com.dewa.sea.data.model.DataReferences.itemsHS
 import com.dewa.sea.databinding.ActivityDetailReservationBinding
+import com.dewa.sea.ui.reservation.code.CodeReservationActivity
 import com.dewa.sea.utils.SharedPreferences
 import java.util.Calendar
+import kotlin.random.Random
 
 class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelectedListener {
 
@@ -42,7 +45,7 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
         dataDetail()
         adapterReference()
 
-        binding.btnDate.setOnClickListener{
+        binding.btnDate.setOnClickListener {
             showDatePickerDialog()
         }
 
@@ -58,13 +61,14 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
         binding.tvPhone.text = pref.getPhone()
     }
 
-    private fun adapterReference(){
-        when(title){
+    private fun adapterReference() {
+        when (title) {
             "Haircuts and Styling" -> adapter = itemsHS
             "Manicure and Pedicure" -> adapter = itemMP
             "Facial Treatments" -> adapter = itemFT
         }
-        binding.rvReference.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvReference.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvReference.adapter = AdapterReference(adapter)
     }
 
@@ -78,7 +82,8 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
         val datePickerDialog = DatePickerDialog(
             this,
             { _: DatePicker, selectedYear: Int, selectedMonth: Int, selectedDay: Int ->
-                val selectedDateDialog = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
+                val selectedDateDialog =
+                    String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
                 binding.tvSelectedDate.text = selectedDateDialog
                 dateReservation = selectedDateDialog
                 selectedDate.set(selectedYear, selectedMonth, selectedDay)
@@ -116,20 +121,40 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
         timeReservation = time
     }
 
-    private fun addDataReservation(){
+    private fun generateRandomNumber(): String {
+        val number = Random.nextInt(1000, 10000)
+        return number.toString()
+    }
+
+    private fun addDataReservation() {
         binding.btnReservation.setOnClickListener {
-            if (dateReservation.isEmpty() && timeReservation.isEmpty()) {
+            if (dateReservation.isEmpty()) {
                 Toast.makeText(this, "try rechecking the data", Toast.LENGTH_SHORT).show()
-            }else{
+            } else if (timeReservation.isEmpty()) {
+                Toast.makeText(this, "try rechecking the data", Toast.LENGTH_SHORT).show()
+            } else {
                 val name = pref.getName()
                 val phone = pref.getPhone()
                 val service = title
                 val date = dateReservation
                 val time = timeReservation
+                val barcode = pref.getUid() + generateRandomNumber()
                 val status = "reservation" // reservation, proses, cancel, done
 
                 Log.d("CEK", "$name & $phone & $service & $date & $time & $status")
-
+                val intent =
+                    Intent(this, CodeReservationActivity::class.java).apply {
+                        putExtra("NAME", name)
+                        putExtra("PHONE", phone)
+                        putExtra("SERVICE", service)
+                        putExtra("DATE", date)
+                        putExtra("TIME", time)
+                        putExtra("BARCODE", barcode)
+                        putExtra("STATUS", status)
+                    }
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
+                finish()
             }
         }
     }

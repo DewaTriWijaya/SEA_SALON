@@ -6,4 +6,13 @@
     <string name="title_activity_natification_pager">NatificationPagerActivity</string>
     <string name="tab_text_1">Reservation</string>
     <string name="tab_text_2">Review</string>
+    <string name="home">Home</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
+    <string name="service">Service</string>
+    <string name="phone">Phone</string>
+    <string name="name">Name</string>
+    <string name="reservation">Reservation</string>
+    <string name="_00_00_0000">00/00/0000</string>
+    <string name="status">Status</string>
 </resources>

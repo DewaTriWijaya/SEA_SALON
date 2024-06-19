@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Profile"
+        app:title="Detail Reservation"
         app:titleTextColor="@color/white" />
 
 
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Name"
+        android:text="@string/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Phone"
+        android:text="@string/phone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
@@ -45,7 +45,7 @@
         android:layout_height="19dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Service"
+        android:text="@string/service"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone" />
 
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Date"
+        android:text="@string/date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/service" />
 
@@ -63,9 +63,9 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dewa Tri Wijaya"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/name" />
+        app:layout_constraintTop_toTopOf="@+id/name"
+        tools:text="Dewa Tri Wijaya" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -78,27 +78,27 @@
         android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="085746785678"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/phone" />
+        app:layout_constraintTop_toTopOf="@+id/phone"
+        tools:text="085746785678" />
 
     <TextView
         android:id="@+id/tvService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Haircut Dan Styling"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/service" />
+        app:layout_constraintTop_toTopOf="@+id/service"
+        tools:text="Haircut Dan Styling" />
 
 
     <TextView
         android:id="@+id/tvSelectedDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00/00/0000"
         app:layout_constraintBottom_toBottomOf="@+id/tvDate"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/tvDate" />
+        app:layout_constraintTop_toTopOf="@+id/tvDate"
+        tools:text="00/00/0000" />
 
     <TextView
         android:id="@+id/time"
@@ -106,27 +106,46 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Time"
+        android:text="@string/time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSelectedDate" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time" />
 
     <TextView
         android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="19:00"
         app:layout_constraintBottom_toBottomOf="@+id/time"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+        app:layout_constraintTop_toTopOf="@+id/time"
+        tools:text="19:00" />
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/status"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/status"
+        tools:text="Reservation" />
 
     <Button
-        android:id="@+id/btnReservation"
+        android:id="@+id/btnHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Home"
+        android:text="@string/home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -136,9 +155,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:contentDescription="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTime"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatus"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -146,10 +166,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="LNA0mJ023VUQb4sEWLd4PTu54GF2-01"
         app:layout_constraintEnd_toEndOf="@+id/img_barcode"
         app:layout_constraintStart_toStartOf="@+id/img_barcode"
-        app:layout_constraintTop_toBottomOf="@+id/img_barcode" />
+        app:layout_constraintTop_toBottomOf="@+id/img_barcode"
+        tools:text="LNA0mJ023VUQb4sEWLd4PTu54GF2-01" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
