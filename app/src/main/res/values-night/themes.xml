@@ -1,0 +1,8 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.SEASalon" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/yellow_dark</item>
+        <item name="colorPrimaryDark">@color/red_dark</item>
+        <item name="colorAccent">@color/yellow</item>
+    </style>
+</resources>

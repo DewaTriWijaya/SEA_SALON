@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white_human"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/contactUs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact Us"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgContact1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/icon_contact_phone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contactUs" />
+
+        <TextView
+            android:id="@+id/contactThomas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="08123456789 / Thomas"
+            app:layout_constraintBottom_toBottomOf="@+id/imgContact1"
+            app:layout_constraintStart_toEndOf="@+id/imgContact1"
+            app:layout_constraintTop_toTopOf="@+id/imgContact1" />
+
+        <Button
+            android:id="@+id/btnThomas"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:text="WhatsApp"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/contactThomas"
+            app:layout_constraintStart_toEndOf="@+id/contactThomas"
+            app:layout_constraintTop_toTopOf="@+id/contactThomas" />
+
+        <Button
+            android:id="@+id/btnSekar"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:text="WhatsApp"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/contactSekar"
+            app:layout_constraintStart_toEndOf="@+id/contactThomas"
+            app:layout_constraintTop_toTopOf="@+id/contactSekar" />
+
+        <ImageView
+            android:id="@+id/imgContact2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/icon_contact_phone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnThomas" />
+
+        <TextView
+            android:id="@+id/contactSekar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="08164829372 / Sekar"
+            app:layout_constraintBottom_toBottomOf="@+id/imgContact2"
+            app:layout_constraintStart_toEndOf="@+id/imgContact2"
+            app:layout_constraintTop_toTopOf="@+id/imgContact2" />
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

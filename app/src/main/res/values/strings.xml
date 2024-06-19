@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SEA Salon</string>
+
+    <string name="haircut">Haircut Dan Styling Model Reference</string>
+    <string name="WEB_CLIENT_ID">826704342424-h50h3au40i61ui9dod03o00n203dqe19.apps.googleusercontent.com</string>
+    <string name="title_activity_natification_pager">NatificationPagerActivity</string>
+    <string name="tab_text_1">Reservation</string>
+    <string name="tab_text_2">Review</string>
+</resources>

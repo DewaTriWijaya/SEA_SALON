@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "826704342424",
+    "project_id": "comfest-42eb0",
+    "storage_bucket": "comfest-42eb0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826704342424:android:d38468f0bb475b224f4fed",
+        "android_client_info": {
+          "package_name": "com.dewa.sea"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDECjtGVnk6QizigHJpMEB32HAayRlCAUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
