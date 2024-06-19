@@ -5,44 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_human"
-    android:padding="16dp"
-    tools:context=".ui.reservation.detail.DetailReservationActivity">
+    tools:context=".ui.reservation.code.CodeReservationActivity">
 
-    <TextView
-        android:id="@+id/title_"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/haircut"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_reference"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/yellow_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_"
-        tools:itemCount="1"
-        tools:listitem="@layout/item_card_reference" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Profile"
+        app:titleTextColor="@color/white" />
+
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_reference" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Phone"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,6 +43,7 @@
         android:id="@+id/service"
         android:layout_width="wrap_content"
         android:layout_height="19dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Service"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,6 +53,7 @@
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Date"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="100dp" />
+        app:layout_constraintGuide_begin="115dp" />
 
     <TextView
         android:id="@+id/tvPhone"
@@ -97,54 +90,67 @@
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/service" />
 
-    <ImageButton
-        android:id="@+id/btnDate"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/background_date"
-        android:src="@drawable/icon_date"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/tvDate" />
 
     <TextView
         android:id="@+id/tvSelectedDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:text="00/00/0000"
-        app:layout_constraintBottom_toBottomOf="@+id/btnDate"
-        app:layout_constraintStart_toEndOf="@+id/btnDate"
-        app:layout_constraintTop_toTopOf="@+id/btnDate" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvDate"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/tvDate" />
 
     <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnDate" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSelectedDate" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTime"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnReservation"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="19:00"
+        app:layout_constraintBottom_toBottomOf="@+id/time"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/time"
-        tools:listitem="@layout/item_card_time" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
     <Button
         android:id="@+id/btnReservation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reservation"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/img_barcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTime"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvBarcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="LNA0mJ023VUQb4sEWLd4PTu54GF2-01"
+        app:layout_constraintEnd_toEndOf="@+id/img_barcode"
+        app:layout_constraintStart_toStartOf="@+id/img_barcode"
+        app:layout_constraintTop_toBottomOf="@+id/img_barcode" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

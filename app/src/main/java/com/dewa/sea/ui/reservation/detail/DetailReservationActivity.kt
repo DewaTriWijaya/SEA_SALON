@@ -2,10 +2,13 @@ package com.dewa.sea.ui.reservation.detail
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.DatePicker
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dewa.sea.data.model.DataReferences.itemFT
@@ -19,9 +22,15 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
 
     private lateinit var binding: ActivityDetailReservationBinding
     private lateinit var pref: SharedPreferences
-    private var title = ""
+    private lateinit var adapterTime: AdapterTime
+    private var selectedDate: Calendar = Calendar.getInstance()
     private var adapter = listOf<String>()
 
+    private var title = ""
+    private var timeReservation = ""
+    private var dateReservation = ""
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailReservationBinding.inflate(layoutInflater)
@@ -36,6 +45,8 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
         binding.btnDate.setOnClickListener{
             showDatePickerDialog()
         }
+
+        addDataReservation()
     }
 
     @SuppressLint("SetTextI18n")
@@ -57,6 +68,7 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
         binding.rvReference.adapter = AdapterReference(adapter)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -66,9 +78,11 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
         val datePickerDialog = DatePickerDialog(
             this,
             { _: DatePicker, selectedYear: Int, selectedMonth: Int, selectedDay: Int ->
-                val selectedDate =
-                    String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
-                binding.tvSelectedDate.text = selectedDate
+                val selectedDateDialog = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
+                binding.tvSelectedDate.text = selectedDateDialog
+                dateReservation = selectedDateDialog
+                selectedDate.set(selectedYear, selectedMonth, selectedDay)
+                updateAdapterWithSelectedDate(selectedDate)
             },
             year,
             month,
@@ -85,16 +99,39 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
             timeList.add(formattedTime)
         }
 
+        adapterTime = AdapterTime(this, timeList, this, selectedDate)
         binding.rvTime.layoutManager = GridLayoutManager(this, 3)
-        binding.rvTime.adapter = AdapterTime(timeList, this)
+        binding.rvTime.adapter = adapterTime
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun updateAdapterWithSelectedDate(selectedDate: Calendar) {
+        adapterTime.setDate(selectedDate)
+        adapterTime.notifyDataSetChanged()
     }
 
     override fun onTimeSelected(time: String) {
         Toast.makeText(this, "Selected time: $time", Toast.LENGTH_SHORT).show()
+        timeReservation = time
     }
 
     private fun addDataReservation(){
+        binding.btnReservation.setOnClickListener {
+            if (dateReservation.isEmpty() && timeReservation.isEmpty()) {
+                Toast.makeText(this, "try rechecking the data", Toast.LENGTH_SHORT).show()
+            }else{
+                val name = pref.getName()
+                val phone = pref.getPhone()
+                val service = title
+                val date = dateReservation
+                val time = timeReservation
+                val status = "reservation" // reservation, proses, cancel, done
 
+                Log.d("CEK", "$name & $phone & $service & $date & $time & $status")
+
+            }
+        }
     }
 
 }
