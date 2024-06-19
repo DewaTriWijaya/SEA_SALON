@@ -20,6 +20,8 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar)
+
         pref = SharedPreferences(this)
         data()
 
@@ -32,14 +34,12 @@ class ProfileActivity : AppCompatActivity() {
     private fun data() {
         Glide.with(this)
             .load(pref.getPhoto())
-            .transform(CircleCrop())
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .centerCrop()
             .into(binding.imgProfile)
 
         binding.apply {
             tvEmail.text = pref.getEmail()
             tvName.text = pref.getName()
+            tvPhone.text = pref.getPhone()
         }
     }
 
@@ -49,6 +49,7 @@ class ProfileActivity : AppCompatActivity() {
             setName("")
             setEmail("")
             setUid("")
+            setPhone("")
             setLogin(false)
         }
     }

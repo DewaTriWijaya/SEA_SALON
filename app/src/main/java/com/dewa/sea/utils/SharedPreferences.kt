@@ -49,11 +49,20 @@ class SharedPreferences(context: Context) {
         editor.apply()
     }
 
+    fun getPhone(): String? {
+        return sharedPreferences.getString(PHONE, "")
+    }
+    fun setPhone(user: String) {
+        editor.putString(PHONE, user)
+        editor.apply()
+    }
+
     companion object {
         private const val THEME = "theme"
         private const val EMAIL = "email"
         private const val NAME = "name"
         private const val PHOTO = "photo"
+        private const val PHONE ="phone"
         private const val UID = "uid"
     }
 }

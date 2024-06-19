@@ -1,21 +1,24 @@
 package com.dewa.sea.ui.reservation.detail
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dewa.sea.data.model.DataReferences.itemFT
 import com.dewa.sea.data.model.DataReferences.itemMP
 import com.dewa.sea.data.model.DataReferences.itemsHS
-import com.dewa.sea.data.model.DataServices
 import com.dewa.sea.databinding.ActivityDetailReservationBinding
+import com.dewa.sea.utils.SharedPreferences
 import java.util.Calendar
 
-class DetailReservationActivity : AppCompatActivity() {
+class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelectedListener {
 
     private lateinit var binding: ActivityDetailReservationBinding
+    private lateinit var pref: SharedPreferences
     private var title = ""
     private var adapter = listOf<String>()
 
@@ -23,6 +26,8 @@ class DetailReservationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailReservationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        pref = SharedPreferences(this)
 
         timeAdapter()
         dataDetail()
@@ -33,9 +38,13 @@ class DetailReservationActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun dataDetail() {
         title = intent.getStringExtra("TITLE").toString()
         binding.tvService.text = title
+        binding.title.text = "$title Model Reference"
+        binding.tvName.text = pref.getName()
+        binding.tvPhone.text = pref.getPhone()
     }
 
     private fun adapterReference(){
@@ -65,6 +74,7 @@ class DetailReservationActivity : AppCompatActivity() {
             month,
             day
         )
+        datePickerDialog.datePicker.minDate = calendar.timeInMillis
         datePickerDialog.show()
     }
 
@@ -76,7 +86,15 @@ class DetailReservationActivity : AppCompatActivity() {
         }
 
         binding.rvTime.layoutManager = GridLayoutManager(this, 3)
-        binding.rvTime.adapter = AdapterTime(timeList)
+        binding.rvTime.adapter = AdapterTime(timeList, this)
+    }
+
+    override fun onTimeSelected(time: String) {
+        Toast.makeText(this, "Selected time: $time", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun addDataReservation(){
+
     }
 
 }
