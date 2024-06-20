@@ -83,12 +83,15 @@ class ReservationFragment : Fragment(), AdapterReservation.OnTimeSelectedListene
     }
 
     private fun deleteReservationFromFireStore(reservation: String) {
+        //binding.progressBar.visibility = View.VISIBLE
+
         fireStore.collection("reservation")
             .document(reservation)
             .delete()
             .addOnSuccessListener {
                 Toast.makeText(context, "Reservation deleted successfully", Toast.LENGTH_SHORT).show()
                 getDataReservationFromFireStore()
+                //binding.progressBar.visibility = View.GONE
             }
             .addOnFailureListener { e ->
                 Toast.makeText(
