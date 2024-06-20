@@ -34,7 +34,6 @@ class AdapterServices(private val items: List<DataServices>) :
                 } else {
                     val intent =
                         Intent(itemView.context, DetailReservationActivity::class.java).apply {
-                            putExtra("IMAGE_RES_ID", item.imageResId)
                             putExtra("TITLE", item.title)
                         }
                     itemView.context.startActivity(intent)

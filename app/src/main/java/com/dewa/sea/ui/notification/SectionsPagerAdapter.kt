@@ -5,7 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.dewa.sea.R
-import com.dewa.sea.ui.notification.reservation.PlaceholderFragment
+import com.dewa.sea.ui.notification.reservation.ReservationFragment
+import com.dewa.sea.ui.notification.review.ReviewFragment
 
 private val TAB_TITLES = arrayOf(
     R.string.tab_text_1,
@@ -17,8 +18,8 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
 
     override fun getItem(position: Int): Fragment {
         return when (position){
-            0 -> PlaceholderFragment()
-            1 -> PlaceholderFragment()
+            0 -> ReservationFragment()
+            1 -> ReviewFragment()
             else -> throw IllegalStateException("Unexpected position $position")
         }
     }

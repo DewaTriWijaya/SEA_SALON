@@ -55,7 +55,7 @@ class AdapterTime(
         val isToday = calendarToday.get(Calendar.YEAR) == selectedDate.get(Calendar.YEAR) &&
                 calendarToday.get(Calendar.DAY_OF_YEAR) == selectedDate.get(Calendar.DAY_OF_YEAR)
 
-        if (isToday && currentTime.isAfter(itemTime.plusHours(1))) {
+        if (isToday && currentTime.isAfter(itemTime.plusHours(0))) {
             holder.binding.titleService.isEnabled = false
             holder.binding.titleService.setBackgroundColor(Color.GRAY)
         } else {

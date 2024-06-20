@@ -1,23 +1,21 @@
-package com.dewa.sea.ui.notification.reservation
+package com.dewa.sea.ui.notification.review
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import com.dewa.sea.databinding.FragmentReviewBinding
 
-import com.dewa.sea.databinding.FragmentNatificationPagerBinding
+class ReviewFragment : Fragment() {
 
-class PlaceholderFragment : Fragment() {
-
-    private var _binding: FragmentNatificationPagerBinding? = null
+    private var _binding: FragmentReviewBinding? = null
     private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentNatificationPagerBinding.inflate(inflater, container, false)
+        _binding = FragmentReviewBinding.inflate(inflater, container, false)
         return binding.root
     }
 

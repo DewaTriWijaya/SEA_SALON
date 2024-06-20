@@ -18,6 +18,7 @@ import com.dewa.sea.data.model.DataReferences.itemsHS
 import com.dewa.sea.databinding.ActivityDetailReservationBinding
 import com.dewa.sea.ui.reservation.code.CodeReservationActivity
 import com.dewa.sea.utils.SharedPreferences
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Calendar
 import kotlin.random.Random
 
@@ -25,6 +26,7 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
 
     private lateinit var binding: ActivityDetailReservationBinding
     private lateinit var pref: SharedPreferences
+    private val fireStore = FirebaseFirestore.getInstance()
     private lateinit var adapterTime: AdapterTime
     private var selectedDate: Calendar = Calendar.getInstance()
     private var adapter = listOf<String>()
@@ -38,6 +40,8 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
         super.onCreate(savedInstanceState)
         binding = ActivityDetailReservationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         pref = SharedPreferences(this)
 
@@ -133,30 +137,68 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
             } else if (timeReservation.isEmpty()) {
                 Toast.makeText(this, "try rechecking the data", Toast.LENGTH_SHORT).show()
             } else {
-                val name = pref.getName()
-                val phone = pref.getPhone()
-                val service = title
-                val date = dateReservation
-                val time = timeReservation
-                val barcode = pref.getUid() + generateRandomNumber()
-                val status = "reservation" // reservation, proses, cancel, done
+                val nameData = pref.getName().toString()
+                val phoneData = pref.getPhone().toString()
+                val serviceData = title
+                val dateData = dateReservation
+                val timeData = timeReservation
+                val barcodeData = pref.getUid() + generateRandomNumber()
+                val statusData = "reservation" // reservation, proses, cancel, done
 
-                Log.d("CEK", "$name & $phone & $service & $date & $time & $status")
-                val intent =
-                    Intent(this, CodeReservationActivity::class.java).apply {
-                        putExtra("NAME", name)
-                        putExtra("PHONE", phone)
-                        putExtra("SERVICE", service)
-                        putExtra("DATE", date)
-                        putExtra("TIME", time)
-                        putExtra("BARCODE", barcode)
-                        putExtra("STATUS", status)
-                    }
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                startActivity(intent)
-                finish()
+                saveUserDataToFireStore(
+                    nameData,
+                    phoneData,
+                    serviceData,
+                    dateData,
+                    timeData,
+                    barcodeData,
+                    statusData
+                )
+
             }
         }
     }
 
+    private fun saveUserDataToFireStore(
+        name: String,
+        phone: String,
+        service: String,
+        date: String,
+        time: String,
+        barcode: String,
+        status: String
+    ) {
+        val userData = hashMapOf(
+            "name" to name,
+            "phone" to phone,
+            "service" to service,
+            "date" to date,
+            "time" to time,
+            "barcode" to barcode,
+            "status" to status
+        )
+
+        fireStore.collection("reservation")
+            .add(userData)
+            .addOnSuccessListener {
+                Toast.makeText(this, "User data saved successfully", Toast.LENGTH_SHORT).show()
+                Log.d("CEK", "$name & $phone & $service & $date & $time & $status")
+                val intent = Intent(this, CodeReservationActivity::class.java).apply {
+                    putExtra("NAME", name)
+                    putExtra("PHONE", phone)
+                    putExtra("SERVICE", service)
+                    putExtra("DATE", date)
+                    putExtra("TIME", time)
+                    putExtra("BARCODE", barcode)
+                    putExtra("STATUS", status)
+                }
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error saving user data: ${e.message}", Toast.LENGTH_SHORT)
+                    .show()
+            }
+    }
 }
