@@ -1,6 +1,7 @@
 package com.dewa.sea.ui.notification.reservation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dewa.sea.data.model.DataReservation
 import com.dewa.sea.databinding.FragmentReservationBinding
+import com.dewa.sea.utils.SharedPreferences
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ReservationFragment : Fragment(), AdapterReservation.OnTimeSelectedListener {
@@ -18,6 +20,7 @@ class ReservationFragment : Fragment(), AdapterReservation.OnTimeSelectedListene
     private val fireStore = FirebaseFirestore.getInstance()
     private val reservation = mutableListOf<DataReservation>()
     private lateinit var adapterReservation: AdapterReservation
+    private lateinit var pref: SharedPreferences
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,6 +33,7 @@ class ReservationFragment : Fragment(), AdapterReservation.OnTimeSelectedListene
         super.onViewCreated(view, savedInstanceState)
         getDataReservationFromFireStore()
         recyclerviewReservation()
+        pref = SharedPreferences(this.requireContext())
     }
 
     private fun getDataReservationFromFireStore() {
@@ -46,18 +50,21 @@ class ReservationFragment : Fragment(), AdapterReservation.OnTimeSelectedListene
                     val barcode = document.getString("barcode")
                     val status = document.getString("status")
 
-                    reservation.add(
-                        DataReservation(
-                            id,
-                            name.toString(),
-                            phone.toString(),
-                            service.toString(),
-                            date.toString(),
-                            time.toString(),
-                            barcode.toString(),
-                            status.toString()
+                    Log.d("CEK", id)
+                    if (removeLastFourChars(barcode.toString()) == pref.getUid().toString()) {
+                        reservation.add(
+                            DataReservation(
+                                id,
+                                name.toString(),
+                                phone.toString(),
+                                service.toString(),
+                                date.toString(),
+                                time.toString(),
+                                barcode.toString(),
+                                status.toString()
+                            )
                         )
-                    )
+                    }
                 }
                 adapterReservation.submitList(reservation)
             }
@@ -67,7 +74,15 @@ class ReservationFragment : Fragment(), AdapterReservation.OnTimeSelectedListene
             }
     }
 
-    private fun recyclerviewReservation(){
+    fun removeLastFourChars(input: String): String {
+        return if (input.length > 4) {
+            input.substring(0, input.length - 4)
+        } else {
+            input
+        }
+    }
+
+    private fun recyclerviewReservation() {
         adapterReservation = AdapterReservation(this)
         binding.rvReservation.layoutManager = LinearLayoutManager(context)
         binding.rvReservation.adapter = adapterReservation
@@ -89,7 +104,8 @@ class ReservationFragment : Fragment(), AdapterReservation.OnTimeSelectedListene
             .document(reservation)
             .delete()
             .addOnSuccessListener {
-                Toast.makeText(context, "Reservation deleted successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Reservation deleted successfully", Toast.LENGTH_SHORT)
+                    .show()
                 getDataReservationFromFireStore()
                 //binding.progressBar.visibility = View.GONE
             }
