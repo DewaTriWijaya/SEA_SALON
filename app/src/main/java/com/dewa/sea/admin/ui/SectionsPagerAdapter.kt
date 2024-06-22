@@ -1,28 +1,26 @@
-package com.dewa.sea.ui.notification
+package com.dewa.sea.admin.ui
 
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.dewa.sea.R
-import com.dewa.sea.ui.notification.history.HistoryFragment
-import com.dewa.sea.ui.notification.reservation.ReservationFragment
-import com.dewa.sea.ui.notification.review.ReviewFragment
+import com.dewa.sea.admin.ui.reservation.AccAdminFragment
+
 
 private val TAB_TITLES = arrayOf(
-    R.string.tab_text_1,
-    R.string.tab_text_2,
-    R.string.tab_text_3
+    R.string.tab_admin_1,
+    R.string.tab_admin_2,
+    R.string.tab_admin_3
 )
-
 class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position){
-            0 -> ReservationFragment()
-            1 -> ReviewFragment()
-            2 -> HistoryFragment()
+            0 -> AccAdminFragment()
+            1 -> AccAdminFragment()
+            2 -> AccAdminFragment()
             else -> throw IllegalStateException("Unexpected position $position")
         }
     }

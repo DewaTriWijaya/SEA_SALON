@@ -4,16 +4,16 @@ import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import com.dewa.sea.databinding.ActivityNatificationPagerBinding
+import com.dewa.sea.databinding.ActivityNotificationPagerBinding
 
 class NotificationPagerActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityNatificationPagerBinding
+    private lateinit var binding: ActivityNotificationPagerBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityNatificationPagerBinding.inflate(layoutInflater)
+        binding = ActivityNotificationPagerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)

@@ -3,20 +3,29 @@ package com.dewa.sea.ui.home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dewa.sea.R
+import com.dewa.sea.data.Repository
 import com.dewa.sea.data.model.DataServices
 import com.dewa.sea.databinding.ActivityHomeBinding
 import com.dewa.sea.databinding.DialogContactBinding
+import com.dewa.sea.ui.ViewModelFactory
 import com.dewa.sea.ui.notification.NotificationPagerActivity
 import com.dewa.sea.ui.profile.ProfileActivity
+import com.dewa.sea.utils.SharedPreferences
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var pref: SharedPreferences
+    private val homeViewModel: HomeViewModel by viewModels {
+        ViewModelFactory(Repository())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +33,28 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        pref = SharedPreferences(this)
 
         serviceAdapter()
+        Log.d("CEK", pref.getEmail().toString())
+        //dataUser()
+
         binding.btnContactUs.setOnClickListener {
             contactUsDialog()
+        }
+    }
+
+    private fun dataUser(){
+        homeViewModel.fetchUserByEmail(pref.getEmail().toString())
+        homeViewModel.user.observe(this){
+            pref.apply {
+                if (it != null) {
+                    setEmail(it.email)
+                    setName(it.name)
+                    setPhone(it.phone)
+                    setUid(it.uid)
+                }
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.dewa.sea.admin.AdminActivity
 import com.dewa.sea.databinding.ActivityMainBinding
 import com.dewa.sea.ui.home.HomeActivity
 import com.dewa.sea.ui.login.LoginActivity
@@ -27,12 +28,18 @@ class MainActivity : AppCompatActivity() {
             Handler(Looper.getMainLooper()).postDelayed(
                 {
                     run {
-                        startActivity(Intent(this@MainActivity, HomeActivity::class.java))
-                        finish()
+                        val role = pref.getRole().toString()
+                        if (role == "user") {
+                            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
+                            finish()
+                        }else if (role == "admin"){
+                            startActivity(Intent(this@MainActivity, AdminActivity::class.java))
+                            finish()
+                        }
                     }
                 }, delayNumber.toLong()
             )
-        }else{
+        } else {
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
         }
     }
