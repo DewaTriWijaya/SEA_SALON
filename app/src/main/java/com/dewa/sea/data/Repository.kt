@@ -151,16 +151,17 @@ class Repository {
                     val time = document.getString("time")
                     val barcode = document.getString("barcode")
                     val status = document.getString("status")
-                    reservation.add(DataReservation(
-                        id,
-                        name.toString(),
-                        phone.toString(),
-                        service.toString(),
-                        date.toString(),
-                        time.toString(),
-                        barcode.toString(),
-                        status.toString()
-                    )
+                    reservation.add(
+                        DataReservation(
+                            id,
+                            name.toString(),
+                            phone.toString(),
+                            service.toString(),
+                            date.toString(),
+                            time.toString(),
+                            barcode.toString(),
+                            status.toString()
+                        )
                     )
                 }
                 callback(reservation)
@@ -196,7 +197,8 @@ class Repository {
                     val time = document.getString("time")
                     val barcode = document.getString("barcode")
                     val status = document.getString("status")
-                    reservation.add(DataReservation(
+                    reservation.add(
+                        DataReservation(
                             id,
                             name.toString(),
                             phone.toString(),
@@ -213,6 +215,23 @@ class Repository {
             .addOnFailureListener { exception ->
                 Log.e("ServiceRepository", "Error getting documents: ", exception)
                 callback(emptyList())
+            }
+    }
+
+    fun updateReservationStatusAdmin(
+        reservationId: String,
+        newStatus: String,
+        callback: (Boolean) -> Unit
+    ) {
+        fireStore.collection("reservation")
+            .document(reservationId)
+            .update("status", newStatus)
+            .addOnSuccessListener {
+                callback(true)
+            }
+            .addOnFailureListener { exception ->
+                Log.e("Repository", "Error updating document: ", exception)
+                callback(false)
             }
     }
 

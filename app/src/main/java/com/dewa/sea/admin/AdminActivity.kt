@@ -1,11 +1,17 @@
 package com.dewa.sea.admin
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
+import com.dewa.sea.R
 import com.dewa.sea.admin.ui.SectionsPagerAdapter
 import com.dewa.sea.databinding.ActivityAdminBinding
+import com.dewa.sea.ui.profile.ProfileActivity
 
 class AdminActivity : AppCompatActivity() {
 
@@ -22,5 +28,24 @@ class AdminActivity : AppCompatActivity() {
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = binding.tabs
         tabs.setupWithViewPager(viewPager)
+
+        binding.fab.setOnClickListener {
+            Toast.makeText(this, "Add Service", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_admin, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_profile -> {
+                startActivity(Intent(this, ProfileActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

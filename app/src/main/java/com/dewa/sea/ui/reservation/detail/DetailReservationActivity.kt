@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dewa.sea.R
 import com.dewa.sea.data.Repository
 import com.dewa.sea.databinding.ActivityDetailReservationBinding
-import com.dewa.sea.ui.ViewModelFactory
+import com.dewa.sea.data.ViewModelFactory
 import com.dewa.sea.ui.reservation.code.CodeReservationActivity
 import com.dewa.sea.utils.SharedPreferences
 import java.util.Calendar

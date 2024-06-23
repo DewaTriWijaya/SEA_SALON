@@ -16,4 +16,10 @@ class AccAdminViewModel(private val repository: Repository) : ViewModel() {
             _services.value = servicesList
         }
     }
+
+    fun updateReservationStatus(reservationId: String, newStatus: String, callback: (Boolean) -> Unit) {
+        repository.updateReservationStatusAdmin(reservationId, newStatus) { success ->
+            callback(success)
+        }
+    }
 }

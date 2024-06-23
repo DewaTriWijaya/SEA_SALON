@@ -12,7 +12,7 @@ import com.dewa.sea.R
 import com.dewa.sea.data.Repository
 import com.dewa.sea.databinding.ActivityHomeBinding
 import com.dewa.sea.databinding.DialogContactBinding
-import com.dewa.sea.ui.ViewModelFactory
+import com.dewa.sea.data.ViewModelFactory
 import com.dewa.sea.ui.notification.NotificationPagerActivity
 import com.dewa.sea.ui.profile.ProfileActivity
 import com.dewa.sea.utils.SharedPreferences

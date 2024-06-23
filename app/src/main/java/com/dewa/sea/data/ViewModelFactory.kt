@@ -1,9 +1,8 @@
-package com.dewa.sea.ui
+package com.dewa.sea.data
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dewa.sea.admin.ui.reservation.AccAdminViewModel
-import com.dewa.sea.data.Repository
 import com.dewa.sea.ui.home.HomeViewModel
 import com.dewa.sea.ui.login.LoginViewModel
 import com.dewa.sea.ui.notification.reservation.ReservationViewModel

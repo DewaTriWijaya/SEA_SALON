@@ -18,9 +18,9 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
 
     override fun getItem(position: Int): Fragment {
         return when (position){
-            0 -> AccAdminFragment()
-            1 -> AccAdminFragment()
-            2 -> AccAdminFragment()
+            0 -> AccAdminFragment("reservation")
+            1 -> AccAdminFragment("proses")
+            2 -> AccAdminFragment("done")
             else -> throw IllegalStateException("Unexpected position $position")
         }
     }

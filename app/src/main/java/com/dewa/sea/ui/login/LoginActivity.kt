@@ -8,15 +8,13 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.dewa.sea.admin.AdminActivity
 import com.dewa.sea.data.Repository
 import com.dewa.sea.databinding.ActivityLoginBinding
-import com.dewa.sea.ui.ViewModelFactory
+import com.dewa.sea.data.ViewModelFactory
 import com.dewa.sea.ui.home.HomeActivity
 import com.dewa.sea.ui.register.RegisterActivity
 import com.dewa.sea.utils.SharedPreferences
-import kotlinx.coroutines.Delay
 
 class LoginActivity : AppCompatActivity() {
 

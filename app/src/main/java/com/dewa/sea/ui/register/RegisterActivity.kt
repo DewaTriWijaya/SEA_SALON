@@ -9,10 +9,9 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.dewa.sea.data.Repository
 import com.dewa.sea.databinding.ActivityRegisterBinding
-import com.dewa.sea.ui.ViewModelFactory
+import com.dewa.sea.data.ViewModelFactory
 import com.dewa.sea.ui.home.HomeActivity
 import com.dewa.sea.ui.login.LoginActivity
-import com.dewa.sea.utils.SharedPreferences
 
 class RegisterActivity : AppCompatActivity() {
 

@@ -26,6 +26,18 @@ class AdapterReservationAdmin(
                 tvBarcode.text = item.barcodeData
                 tvTime.text = item.timeData
 
+                when (item.statusData) {
+                    "reservation" ->{
+                        btnCancel.text = "Reservation"
+                    }
+                    "proses" ->{
+                        btnCancel.text = "Proses"
+                    }
+                    "done" ->{
+                        btnCancel.text = "Done"
+                    }
+                }
+
                 binding.btnCancel.setOnClickListener {
                     callback.onTimeSelected(item.id)
                 }

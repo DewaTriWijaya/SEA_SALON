@@ -1,19 +1,16 @@
 package com.dewa.sea.ui.notification.reservation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dewa.sea.data.Repository
-import com.dewa.sea.data.model.DataReservation
 import com.dewa.sea.databinding.FragmentReservationBinding
-import com.dewa.sea.ui.ViewModelFactory
+import com.dewa.sea.data.ViewModelFactory
 import com.dewa.sea.utils.SharedPreferences
 
 class ReservationFragment : Fragment(), AdapterReservation.OnTimeSelectedListener {
