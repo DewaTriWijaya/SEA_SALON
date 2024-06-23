@@ -6,19 +6,19 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.MenuItem
 import android.widget.DatePicker
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dewa.sea.data.model.DataReferences.itemFT
-import com.dewa.sea.data.model.DataReferences.itemMP
-import com.dewa.sea.data.model.DataReferences.itemsHS
+import com.dewa.sea.R
+import com.dewa.sea.data.Repository
 import com.dewa.sea.databinding.ActivityDetailReservationBinding
+import com.dewa.sea.ui.ViewModelFactory
 import com.dewa.sea.ui.reservation.code.CodeReservationActivity
 import com.dewa.sea.utils.SharedPreferences
-import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Calendar
 import kotlin.random.Random
 
@@ -26,10 +26,12 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
 
     private lateinit var binding: ActivityDetailReservationBinding
     private lateinit var pref: SharedPreferences
-    private val fireStore = FirebaseFirestore.getInstance()
     private lateinit var adapterTime: AdapterTime
     private var selectedDate: Calendar = Calendar.getInstance()
-    private var adapter = listOf<String>()
+
+    private val detailViewModel: DetailViewModel by viewModels {
+        ViewModelFactory(Repository())
+    }
 
     private var title = ""
     private var timeReservation = ""
@@ -41,7 +43,9 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
         binding = ActivityDetailReservationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.toolbar.navigationIcon?.setTint(resources.getColor(R.color.white, theme))
 
         pref = SharedPreferences(this)
 
@@ -54,6 +58,18 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
         }
 
         addDataReservation()
+        observer()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -66,14 +82,10 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
     }
 
     private fun adapterReference() {
-        when (title) {
-            "Haircuts and Styling" -> adapter = itemsHS
-            "Manicure and Pedicure" -> adapter = itemMP
-            "Facial Treatments" -> adapter = itemFT
-        }
+        val references = intent.getStringArrayListExtra("REFERENCES")
         binding.rvReference.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvReference.adapter = AdapterReference(adapter)
+        binding.rvReference.adapter = AdapterReference(references?.toList() as List<String>)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -137,6 +149,7 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
             } else if (timeReservation.isEmpty()) {
                 Toast.makeText(this, "try rechecking the data", Toast.LENGTH_SHORT).show()
             } else {
+                val uidUser = pref.getUid().toString()
                 val nameData = pref.getName().toString()
                 val phoneData = pref.getPhone().toString()
                 val serviceData = title
@@ -145,7 +158,8 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
                 val barcodeData = pref.getUid() + generateRandomNumber()
                 val statusData = "reservation" // reservation, proses, cancel, done
 
-                saveUserDataToFireStore(
+                detailViewModel.addReservation(
+                    uidUser,
                     nameData,
                     phoneData,
                     serviceData,
@@ -154,51 +168,44 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
                     barcodeData,
                     statusData
                 )
-
             }
         }
     }
 
-    private fun saveUserDataToFireStore(
-        name: String,
-        phone: String,
-        service: String,
-        date: String,
-        time: String,
-        barcode: String,
-        status: String
-    ) {
-        val userData = hashMapOf(
-            "name" to name,
-            "phone" to phone,
-            "service" to service,
-            "date" to date,
-            "time" to time,
-            "barcode" to barcode,
-            "status" to status
-        )
+    private fun observer(){
+        detailViewModel.reservationResult.observe(this) { result ->
+            result.onSuccess { documentId ->
+                Toast.makeText(this, "Reservation added successfully", Toast.LENGTH_SHORT).show()
 
-        fireStore.collection("reservation")
-            .add(userData)
-            .addOnSuccessListener {
-                Toast.makeText(this, "User data saved successfully", Toast.LENGTH_SHORT).show()
-                Log.d("CEK", "$name & $phone & $service & $date & $time & $status")
+                val nameData = pref.getName().toString()
+                val phoneData = pref.getPhone().toString()
+                val serviceData = title
+                val dateData = dateReservation
+                val timeData = timeReservation
+                val barcodeData = pref.getUid() + generateRandomNumber()
+                val statusData = "reservation"
+
                 val intent = Intent(this, CodeReservationActivity::class.java).apply {
-                    putExtra("NAME", name)
-                    putExtra("PHONE", phone)
-                    putExtra("SERVICE", service)
-                    putExtra("DATE", date)
-                    putExtra("TIME", time)
-                    putExtra("BARCODE", barcode)
-                    putExtra("STATUS", status)
+                    putExtra("NAME", nameData)
+                    putExtra("PHONE", phoneData)
+                    putExtra("SERVICE", serviceData)
+                    putExtra("DATE", dateData)
+                    putExtra("TIME", timeData)
+                    putExtra("BARCODE", barcodeData)
+                    putExtra("STATUS", statusData)
                 }
+
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
                 finish()
             }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Error saving user data: ${e.message}", Toast.LENGTH_SHORT)
-                    .show()
+            result.onFailure { exception ->
+                Toast.makeText(
+                    this,
+                    "Failed to add reservation: ${exception.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+        }
     }
 }

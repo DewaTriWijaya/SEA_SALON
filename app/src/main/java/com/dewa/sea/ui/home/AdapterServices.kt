@@ -17,16 +17,17 @@ class AdapterServices(private val items: List<DataServices>) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DataServices) {
             binding.tvService.text = item.title
-
             Glide.with(itemView)
-                .load(item.imageResId)
+                .load(item.imageService)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .centerCrop()
                 .into(binding.imageService)
+
             binding.cardService.setOnClickListener {
                 val intent =
                     Intent(itemView.context, DetailReservationActivity::class.java).apply {
                         putExtra("TITLE", item.title)
+                        putStringArrayListExtra("REFERENCES", ArrayList(item.imageReferences))
                     }
                 itemView.context.startActivity(intent)
             }

@@ -3,6 +3,8 @@ package com.dewa.sea.ui.profile
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import com.dewa.sea.R
 import com.dewa.sea.databinding.ActivityProfileBinding
 import com.dewa.sea.ui.login.LoginActivity
 import com.dewa.sea.utils.SharedPreferences
@@ -18,6 +20,8 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.toolbar.navigationIcon?.setTint(resources.getColor(R.color.white, theme))
 
         pref = SharedPreferences(this)
         data()
@@ -33,6 +37,17 @@ class ProfileActivity : AppCompatActivity() {
             tvEmail.text = pref.getEmail()
             tvName.text = pref.getName()
             tvPhone.text = pref.getPhone()
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
