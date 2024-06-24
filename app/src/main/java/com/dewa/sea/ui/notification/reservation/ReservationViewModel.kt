@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dewa.sea.data.Repository
 import com.dewa.sea.data.model.DataReservation
+import com.dewa.sea.data.model.DataReview
 
 class ReservationViewModel(private val repository: Repository) : ViewModel() {
 
@@ -28,6 +29,19 @@ class ReservationViewModel(private val repository: Repository) : ViewModel() {
             } else {
                 _deleteResult.value = Result.failure(Exception(message))
             }
+        }
+    }
+
+    fun addReview(id: String, service: String, date: String, rating: Int, review: String, callback: (Boolean) -> Unit) {
+        val reviewData = DataReview(
+            id = id,
+            service = service,
+            date = date,
+            rating = rating,
+            review = review
+        )
+        repository.addReview(reviewData) { success ->
+            callback(success)
         }
     }
 }

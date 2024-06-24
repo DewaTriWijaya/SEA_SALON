@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.dewa.sea.data.model.DataReservation
+import com.dewa.sea.data.model.DataReview
 import com.dewa.sea.data.model.DataServices
 import com.dewa.sea.utils.SharedPreferences
 import com.google.firebase.auth.FirebaseAuth
@@ -135,6 +136,29 @@ class Repository {
             }
     }
 
+    fun getReservedTimes(service: String, date: String, callback: (List<String>) -> Unit) {
+        Log.d("CEK REPOSITORY", "$service / $date")
+        fireStore.collection("reservation")
+            .whereEqualTo("service", service)
+            .whereEqualTo("date", date)
+            .get()
+            .addOnSuccessListener { documents ->
+                val reserved = mutableListOf<String>()
+                for (document in documents) {
+                    val time = document.getString("time")
+
+                    reserved.add(time.toString())
+                }
+
+                Log.d("CEK SUCCESS", "$reserved")
+                callback(reserved)
+            }
+            .addOnFailureListener { exception ->
+                Log.e("Repository", "Error getting reserved times: ", exception)
+                callback(emptyList())
+            }
+    }
+
 
     fun getReservationsByIDUser(userID: String, callback: (List<DataReservation>) -> Unit) {
         val reservation = mutableListOf<DataReservation>()
@@ -181,6 +205,25 @@ class Repository {
             }
             .addOnFailureListener { e ->
                 callback(false, e.message)
+            }
+    }
+
+    fun addReview(reviewData: DataReview, callback: (Boolean) -> Unit) {
+        val reviewMap = hashMapOf(
+            "id" to reviewData.id,
+            "service" to reviewData.service,
+            "date" to reviewData.date,
+            "rating" to reviewData.rating,
+            "review" to reviewData.review
+        )
+        fireStore.collection("reviews")
+            .add(reviewMap)
+            .addOnSuccessListener {
+                callback(true)
+            }
+            .addOnFailureListener { e ->
+                Log.e("Repository", "Error adding review: ", e)
+                callback(false)
             }
     }
 

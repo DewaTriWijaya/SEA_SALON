@@ -9,11 +9,11 @@ import com.dewa.sea.data.model.DataReservation
 import com.dewa.sea.databinding.ItemCardReservationBinding
 
 class AdapterReservation(
-    private val callback: OnTimeSelectedListener,
+    private val callback: OnSelectedListener,
 ) : ListAdapter<DataReservation, AdapterReservation.AdapterReservationViewHolder>(DiffCallback()) {
 
-    interface OnTimeSelectedListener {
-        fun onTimeSelected(id: String)
+    interface OnSelectedListener {
+        fun onSelected(id: String, service: String, date: String)
     }
 
     inner class AdapterReservationViewHolder(private val binding: ItemCardReservationBinding) :
@@ -26,8 +26,20 @@ class AdapterReservation(
                 tvBarcode.text = item.barcodeData
                 tvTime.text = item.timeData
 
+                when (item.statusData) {
+                    "reservation" ->{
+                        btnCancel.text = "Cancel"
+                    }
+                    "proses" -> {
+                        btnCancel.text = "Proses"
+                    }
+                    "done" ->{
+                        btnCancel.text = "Review"
+                    }
+                }
+
                 binding.btnCancel.setOnClickListener {
-                    callback.onTimeSelected(item.id)
+                    callback.onSelected(item.id, item.serviceData, item.dateData)
                 }
             }
         }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -18,7 +19,10 @@ class AdapterTime(
     private val context: Context,
     private val items: List<String>,
     private val callback: OnTimeSelectedListener,
-    private var selectedDate: Calendar
+    private var selectedDate: Calendar,
+    private val viewModel: DetailViewModel,
+    private var service: String,
+    private var formattedDate: String
 ) :
     RecyclerView.Adapter<AdapterTime.ButtonViewHolder>() {
 
@@ -26,6 +30,7 @@ class AdapterTime(
         fun onTimeSelected(time: String)
     }
 
+    private var reservedTimes = listOf<String>()
     private var selectedItemPosition: Int = -1
 
     inner class ButtonViewHolder(val binding: ItemCardTimeBinding) :
@@ -55,13 +60,17 @@ class AdapterTime(
         val isToday = calendarToday.get(Calendar.YEAR) == selectedDate.get(Calendar.YEAR) &&
                 calendarToday.get(Calendar.DAY_OF_YEAR) == selectedDate.get(Calendar.DAY_OF_YEAR)
 
-        if (isToday && currentTime.isAfter(itemTime.plusHours(-1))) {
+        val isReserved = reservedTimes.contains(time)
+        Log.d("CEK ADAPTER", "$reservedTimes")
+
+        if (isToday && currentTime.isAfter(itemTime.plusHours(-1)) || isReserved) {   // || !isAvailable
             holder.binding.titleService.isEnabled = false
             holder.binding.titleService.setBackgroundColor(Color.GRAY)
         } else {
             holder.binding.titleService.isEnabled = true
             holder.binding.titleService.setBackgroundColor(if (position == selectedItemPosition) Color.GREEN else Color.WHITE)
         }
+
 
         holder.binding.root.setOnClickListener {
             if (holder.binding.titleService.isEnabled) {
@@ -84,7 +93,14 @@ class AdapterTime(
         return items.size
     }
 
-    fun setDate(selectedDate: Calendar) {
+    fun setReservedTimes(times: List<String>) {
+        reservedTimes = times
+        notifyDataSetChanged()
+    }
+
+    fun setDate(selectedDate: Calendar, title: String, formattedDate: String) {
         this.selectedDate = selectedDate
+        this.formattedDate = formattedDate
+        this.service = title
     }
 }

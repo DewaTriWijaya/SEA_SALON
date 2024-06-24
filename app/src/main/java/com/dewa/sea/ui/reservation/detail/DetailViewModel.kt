@@ -27,4 +27,8 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
             }
         }
     }
+
+    fun getReservedTimes(service: String, date: String, callback: (List<String>) -> Unit) {
+        repository.getReservedTimes(service, date, callback)
+    }
 }

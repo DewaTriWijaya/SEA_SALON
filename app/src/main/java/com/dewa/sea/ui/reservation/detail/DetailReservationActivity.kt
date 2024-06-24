@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.DatePicker
 import android.widget.Toast
@@ -19,7 +20,9 @@ import com.dewa.sea.databinding.ActivityDetailReservationBinding
 import com.dewa.sea.data.ViewModelFactory
 import com.dewa.sea.ui.reservation.code.CodeReservationActivity
 import com.dewa.sea.utils.SharedPreferences
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 import kotlin.random.Random
 
 class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelectedListener {
@@ -120,16 +123,35 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
             timeList.add(formattedTime)
         }
 
-        adapterTime = AdapterTime(this, timeList, this, selectedDate)
+        val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val formattedDate = dateFormatter.format(selectedDate.time)
+
+        adapterTime = AdapterTime(this, timeList, this, selectedDate, detailViewModel, title, formattedDate)
         binding.rvTime.layoutManager = GridLayoutManager(this, 3)
         binding.rvTime.adapter = adapterTime
+
+        // Initial call to get reserved times
+        detailViewModel.getReservedTimes(title, formattedDate) { reservedTimes ->
+            adapterTime.setReservedTimes(reservedTimes)
+            Log.d("CEK DETAIL TIME", "$reservedTimes")
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun updateAdapterWithSelectedDate(selectedDate: Calendar) {
-        adapterTime.setDate(selectedDate)
+        title = intent.getStringExtra("TITLE").toString()
+        val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val formattedDate = dateFormatter.format(selectedDate.time)
+        adapterTime.setDate(selectedDate,title,formattedDate)
         adapterTime.notifyDataSetChanged()
+
+        // Update reserved times for the selected date
+        Log.d("CEK DETAIL DATA", "$title / $formattedDate")
+        detailViewModel.getReservedTimes(title, formattedDate) { reservedTimes ->
+            adapterTime.setReservedTimes(reservedTimes)
+            Log.d("CEK DETAIL UPDATE", "$reservedTimes")
+        }
     }
 
     override fun onTimeSelected(time: String) {
