@@ -42,9 +42,14 @@ class AccAdminFragment(private val status: String) : Fragment(), AdapterReservat
         accViewModel.services.observe(viewLifecycleOwner) { services ->
             services?.let { data ->
                 adapter.submitList(data.filter { it.statusData == status })
+                binding.swipeRefreshLayout.isRefreshing = false
             }
         }
         accViewModel.fetchServices()
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            accViewModel.fetchServices()
+        }
     }
 
     override fun onDestroyView() {

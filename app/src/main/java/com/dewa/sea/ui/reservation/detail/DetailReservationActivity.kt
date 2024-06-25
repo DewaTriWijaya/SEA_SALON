@@ -19,6 +19,7 @@ import com.dewa.sea.data.Repository
 import com.dewa.sea.databinding.ActivityDetailReservationBinding
 import com.dewa.sea.data.ViewModelFactory
 import com.dewa.sea.ui.reservation.code.CodeReservationActivity
+import com.dewa.sea.ui.reservation.review.ReviewsActivity
 import com.dewa.sea.utils.SharedPreferences
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -58,6 +59,14 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
 
         binding.btnDate.setOnClickListener {
             showDatePickerDialog()
+        }
+
+        binding.btnReview.setOnClickListener {
+            title = intent.getStringExtra("TITLE").toString()
+            val intent = Intent(this, ReviewsActivity::class.java).apply {
+                putExtra("SERVICE", title)
+            }
+            startActivity(intent)
         }
 
         addDataReservation()
@@ -126,7 +135,8 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
         val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val formattedDate = dateFormatter.format(selectedDate.time)
 
-        adapterTime = AdapterTime(this, timeList, this, selectedDate, detailViewModel, title, formattedDate)
+        adapterTime =
+            AdapterTime(this, timeList, this, selectedDate, detailViewModel, title, formattedDate)
         binding.rvTime.layoutManager = GridLayoutManager(this, 3)
         binding.rvTime.adapter = adapterTime
 
@@ -143,7 +153,7 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
         title = intent.getStringExtra("TITLE").toString()
         val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val formattedDate = dateFormatter.format(selectedDate.time)
-        adapterTime.setDate(selectedDate,title,formattedDate)
+        adapterTime.setDate(selectedDate, title, formattedDate)
         adapterTime.notifyDataSetChanged()
 
         // Update reserved times for the selected date
@@ -194,7 +204,7 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
         }
     }
 
-    private fun observer(){
+    private fun observer() {
         detailViewModel.reservationResult.observe(this) { result ->
             result.onSuccess { documentId ->
                 Toast.makeText(this, "Reservation added successfully", Toast.LENGTH_SHORT).show()

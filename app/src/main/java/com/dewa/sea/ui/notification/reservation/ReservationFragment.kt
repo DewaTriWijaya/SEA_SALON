@@ -1,6 +1,5 @@
 package com.dewa.sea.ui.notification.reservation
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dewa.sea.data.Repository
 import com.dewa.sea.databinding.FragmentReservationBinding
 import com.dewa.sea.data.ViewModelFactory
-import com.dewa.sea.databinding.DialogContactBinding
 import com.dewa.sea.databinding.DialogReviewBinding
 import com.dewa.sea.utils.SharedPreferences
 
@@ -59,11 +57,12 @@ class ReservationFragment(private val status: String) : Fragment(),
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             reservationViewModel.fetchServices(uid)
+            recyclerviewReservation()
         }
     }
 
     private fun recyclerviewReservation() {
-        adapterReservation = AdapterReservation(this)
+        adapterReservation = AdapterReservation(this, reservationViewModel)
         binding.rvReservation.layoutManager = LinearLayoutManager(context)
         binding.rvReservation.adapter = adapterReservation
     }
@@ -84,7 +83,14 @@ class ReservationFragment(private val status: String) : Fragment(),
             }
 
             "done" -> {
-                reviewDialog(id, service, date)
+                reservationViewModel.checkIfReviewed(id) { isReviewed ->
+                    if (isReviewed) {
+                        Toast.makeText(requireContext(), "This reservation has already been reviewed.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        reviewDialog(id, service, date)
+                        recyclerviewReservation()
+                    }
+                }
             }
         }
 
@@ -98,11 +104,12 @@ class ReservationFragment(private val status: String) : Fragment(),
         
         dialogBinding.apply {
             btnSave.setOnClickListener {
-                val rating = rating.rating
+                val rating = rating.rating.toString()
                 val review = tvReview.text.toString()
+                val name = pref.getName().toString()
 
                 if (review.isNotEmpty()) {
-                    reservationViewModel.addReview(id, service, date, rating.toInt(), review) { success ->
+                    reservationViewModel.addReview(id, name, service, date, rating, review) { success ->
                         if (success) {
                             Toast.makeText(requireContext(), "Review added successfully", Toast.LENGTH_SHORT).show()
                             builder.dismiss()
@@ -129,11 +136,7 @@ class ReservationFragment(private val status: String) : Fragment(),
                 getDataReservationFromFireStore()
             }
             result.onFailure { exception ->
-                Toast.makeText(
-                    requireContext(),
-                    "Failed to delete reservation: ${exception.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(requireContext(), "Failed to delete reservation: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }

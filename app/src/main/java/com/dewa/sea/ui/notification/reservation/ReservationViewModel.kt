@@ -32,9 +32,10 @@ class ReservationViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    fun addReview(id: String, service: String, date: String, rating: Int, review: String, callback: (Boolean) -> Unit) {
+    fun addReview(id: String, name: String, service: String, date: String, rating: String, review: String, callback: (Boolean) -> Unit) {
         val reviewData = DataReview(
             id = id,
+            name = name,
             service = service,
             date = date,
             rating = rating,
@@ -43,5 +44,9 @@ class ReservationViewModel(private val repository: Repository) : ViewModel() {
         repository.addReview(reviewData) { success ->
             callback(success)
         }
+    }
+
+    fun checkIfReviewed(reservationId: String, callback: (Boolean) -> Unit) {
+        repository.checkIfReviewed(reservationId, callback)
     }
 }

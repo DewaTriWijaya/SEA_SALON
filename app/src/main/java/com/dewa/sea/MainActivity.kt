@@ -30,10 +30,14 @@ class MainActivity : AppCompatActivity() {
                     run {
                         val role = pref.getRole().toString()
                         if (role == "user") {
-                            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
+                            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                            startActivity(intent)
                             finish()
                         }else if (role == "admin"){
-                            startActivity(Intent(this@MainActivity, AdminActivity::class.java))
+                            val intent = Intent(this@MainActivity, AdminActivity::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                            startActivity(intent)
                             finish()
                         }
                     }

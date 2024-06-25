@@ -2,7 +2,6 @@ package com.dewa.sea.data
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import com.dewa.sea.data.model.DataReservation
 import com.dewa.sea.data.model.DataReview
 import com.dewa.sea.data.model.DataServices
@@ -141,6 +140,7 @@ class Repository {
         fireStore.collection("reservation")
             .whereEqualTo("service", service)
             .whereEqualTo("date", date)
+            .whereIn("status", listOf("reservation", "proses"))  // cek dulu
             .get()
             .addOnSuccessListener { documents ->
                 val reserved = mutableListOf<String>()
@@ -156,6 +156,23 @@ class Repository {
             .addOnFailureListener { exception ->
                 Log.e("Repository", "Error getting reserved times: ", exception)
                 callback(emptyList())
+            }
+    }
+
+    fun checkIfReviewed(reservationId: String, callback: (Boolean) -> Unit) {
+        fireStore.collection("reviews")
+            .whereEqualTo("id", reservationId)
+            .get()
+            .addOnSuccessListener { document ->
+                if (!document.isEmpty) {
+                    callback(true)
+                } else {
+                    callback(false)
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("Repository", "Error checking review: ", exception)
+                callback(false)
             }
     }
 
@@ -211,6 +228,7 @@ class Repository {
     fun addReview(reviewData: DataReview, callback: (Boolean) -> Unit) {
         val reviewMap = hashMapOf(
             "id" to reviewData.id,
+            "name" to reviewData.name,
             "service" to reviewData.service,
             "date" to reviewData.date,
             "rating" to reviewData.rating,
@@ -224,6 +242,38 @@ class Repository {
             .addOnFailureListener { e ->
                 Log.e("Repository", "Error adding review: ", e)
                 callback(false)
+            }
+    }
+
+    fun getReview(serviceData: String, callback: (List<DataReview>) -> Unit){
+        val reviews = mutableListOf<DataReview>()
+        fireStore.collection("reviews")
+            .whereEqualTo("service", serviceData)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val id = document.id
+                    val name = document.getString("name")
+                    val service = document.getString("service")
+                    val date = document.getString("date")
+                    val review = document.getString("review")
+                    val ratingBar = document.getString("rating")
+                    reviews.add(
+                        DataReview(
+                            id,
+                            name.toString(),
+                            service.toString(),
+                            date.toString(),
+                            ratingBar.toString(),
+                            review.toString()
+                        )
+                    )
+                }
+                callback(reviews)
+            }
+            .addOnFailureListener { exception ->
+                Log.e("ServiceRepository", "Error getting documents: ", exception)
+                callback(emptyList())
             }
     }
 

@@ -10,6 +10,7 @@ import com.dewa.sea.databinding.ItemCardReservationBinding
 
 class AdapterReservation(
     private val callback: OnSelectedListener,
+    private val viewModel: ReservationViewModel
 ) : ListAdapter<DataReservation, AdapterReservation.AdapterReservationViewHolder>(DiffCallback()) {
 
     interface OnSelectedListener {
@@ -27,14 +28,22 @@ class AdapterReservation(
                 tvTime.text = item.timeData
 
                 when (item.statusData) {
-                    "reservation" ->{
+                    "reservation" -> {
                         btnCancel.text = "Cancel"
                     }
+
                     "proses" -> {
                         btnCancel.text = "Proses"
                     }
-                    "done" ->{
-                        btnCancel.text = "Review"
+
+                    "done" -> {
+                        viewModel.checkIfReviewed(item.id) {
+                            if (it) {
+                                btnCancel.text = "Done"
+                            } else {
+                                btnCancel.text = "Review"
+                            }
+                        }
                     }
                 }
 
@@ -64,7 +73,10 @@ class AdapterReservation(
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: DataReservation, newItem: DataReservation): Boolean {
+        override fun areContentsTheSame(
+            oldItem: DataReservation,
+            newItem: DataReservation
+        ): Boolean {
             return oldItem == newItem
         }
     }
