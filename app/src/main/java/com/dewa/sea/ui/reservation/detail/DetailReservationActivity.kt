@@ -88,7 +88,6 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
     private fun dataDetail() {
         title = intent.getStringExtra("TITLE").toString()
         binding.tvService.text = title
-        binding.title.text = "$title Model Reference"
         binding.tvName.text = pref.getName()
         binding.tvPhone.text = pref.getPhone()
     }
@@ -206,7 +205,7 @@ class DetailReservationActivity : AppCompatActivity(), AdapterTime.OnTimeSelecte
 
     private fun observer() {
         detailViewModel.reservationResult.observe(this) { result ->
-            result.onSuccess { documentId ->
+            result.onSuccess {
                 Toast.makeText(this, "Reservation added successfully", Toast.LENGTH_SHORT).show()
 
                 val nameData = pref.getName().toString()

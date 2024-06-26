@@ -1,12 +1,15 @@
 package com.dewa.sea.admin.ui.camera
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.OptIn
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
@@ -19,6 +22,9 @@ import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.dewa.sea.R
+import com.dewa.sea.admin.AdminActivity
+import com.dewa.sea.data.Repository
+import com.dewa.sea.data.ViewModelFactory
 import com.dewa.sea.databinding.ActivityCameraBinding
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScanning
@@ -33,6 +39,10 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var textViewResult: TextView
     private lateinit var buttonBack: Button
     private lateinit var buttonNext: Button
+
+    private val cameraViewModel: CameraViewModel by viewModels {
+        ViewModelFactory(Repository())
+    }
 
     private val cameraExecutor = Executors.newSingleThreadExecutor()
     private val barcodeScanner: BarcodeScanner = BarcodeScanning.getClient()
@@ -104,10 +114,21 @@ class CameraActivity : AppCompatActivity() {
                         val rawValue = barcode.rawValue
                         if (rawValue != null) {
                             runOnUiThread {
-                                textViewResult.text = rawValue
-                                buttonBack.visibility = View.VISIBLE
-                                buttonNext.visibility = View.VISIBLE
-                                previewView.visibility = View.GONE
+                                cameraViewModel.checkIDStatus(rawValue) { isReviewed ->
+                                    if (isReviewed) {
+                                        cameraViewModel.updateReservationStatus(rawValue, "proses") { success ->
+                                            if (success) {
+                                                Toast.makeText(binding.root.context, "Status updated to proses", Toast.LENGTH_SHORT).show()
+                                                startActivity(Intent(this, AdminActivity::class.java))
+                                            } else {
+                                                Toast.makeText(binding.root.context, "Failed to update status", Toast.LENGTH_SHORT).show()
+                                            }
+                                        }
+
+                                    } else {
+                                        Toast.makeText(this, "Reservation ID Done", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
                             }
                         }
                     }

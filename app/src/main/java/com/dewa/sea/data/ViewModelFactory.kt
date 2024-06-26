@@ -2,6 +2,7 @@ package com.dewa.sea.data
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.dewa.sea.admin.ui.camera.CameraViewModel
 import com.dewa.sea.admin.ui.reservation.AccAdminViewModel
 import com.dewa.sea.admin.ui.service.AddServiceViewModel
 import com.dewa.sea.ui.home.HomeViewModel
@@ -30,6 +31,8 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.F
             return AccAdminViewModel(repository) as T
         }else if (modelClass.isAssignableFrom(AddServiceViewModel::class.java)) {
             return AddServiceViewModel(repository) as T
+        }else if (modelClass.isAssignableFrom(CameraViewModel::class.java)) {
+            return CameraViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

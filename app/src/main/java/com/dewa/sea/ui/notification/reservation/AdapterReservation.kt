@@ -1,12 +1,16 @@
 package com.dewa.sea.ui.notification.reservation
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dewa.sea.data.model.DataReservation
 import com.dewa.sea.databinding.ItemCardReservationBinding
+import com.dewa.sea.ui.reservation.code.CodeReservationActivity
+import com.dewa.sea.ui.reservation.detail.DetailReservationActivity
 
 class AdapterReservation(
     private val callback: OnSelectedListener,
@@ -49,6 +53,19 @@ class AdapterReservation(
 
                 binding.btnCancel.setOnClickListener {
                     callback.onSelected(item.id, item.serviceData, item.dateData)
+                }
+
+                binding.cardService.setOnClickListener {
+                    val intent = Intent(itemView.context, CodeReservationActivity::class.java).apply {
+                        putExtra("NAME", item.nameData)
+                        putExtra("PHONE", item.phoneData)
+                        putExtra("SERVICE", item.serviceData)
+                        putExtra("DATE", item.dateData)
+                        putExtra("TIME", item.timeData)
+                        putExtra("BARCODE", item.barcodeData)
+                        putExtra("STATUS", item.statusData)
+                    }
+                    itemView.context.startActivity(intent)
                 }
             }
         }

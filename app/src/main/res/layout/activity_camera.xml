@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
@@ -17,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="QR Code Result"
+        android:text="Scanner QR Code"
         android:textSize="18sp" />
 
     <LinearLayout

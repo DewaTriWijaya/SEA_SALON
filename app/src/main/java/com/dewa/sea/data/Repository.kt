@@ -131,9 +131,10 @@ class Repository {
         )
 
         fireStore.collection("reservation")
-            .add(reservationData)
-            .addOnSuccessListener { documentReference ->
-                callback(true, documentReference.id)
+            .document(barcode)
+            .set(reservationData)
+            .addOnSuccessListener {
+                callback(true, barcode)
             }
             .addOnFailureListener { e ->
                 callback(false, e.message)
@@ -180,7 +181,6 @@ class Repository {
                 callback(false)
             }
     }
-
 
     fun getReservationsByIDUser(userID: String, callback: (List<DataReservation>) -> Unit) {
         val reservation = mutableListOf<DataReservation>()
@@ -282,6 +282,24 @@ class Repository {
             }
     }
 
+    fun checkIDStatus(reservationId: String, callback: (Boolean) -> Unit){
+        fireStore.collection("reservation")
+            .whereEqualTo("barcode", reservationId)
+            .whereEqualTo("status", "reservation")
+            .get()
+            .addOnSuccessListener { document ->
+                if (!document.isEmpty) {
+                    callback(true)
+                } else {
+                    callback(false)
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("Repository", "Error checking review: ", exception)
+                callback(false)
+            }
+    }
+
     fun getReservationsAdmin(callback: (List<DataReservation>) -> Unit) {
         val reservation = mutableListOf<DataReservation>()
         fireStore.collection("reservation").get()
@@ -321,6 +339,7 @@ class Repository {
         newStatus: String,
         callback: (Boolean) -> Unit
     ) {
+        Log.d("CEK", reservationId)
         fireStore.collection("reservation")
             .document(reservationId)
             .update("status", newStatus)
@@ -371,7 +390,7 @@ class Repository {
                     imgReferenceRef.downloadUrl.addOnSuccessListener { imgReferenceUri ->
                         imgReferenceUrls.add(imgReferenceUri.toString())
                         if (imgReferenceUrls.size == imgReferences.size) {
-                            saveServiceToFirestore(
+                            saveServiceToFireStore(
                                 service,
                                 imgServiceUrl,
                                 imgReferenceUrls,
@@ -386,7 +405,7 @@ class Repository {
         }
     }
 
-    private fun saveServiceToFirestore(
+    private fun saveServiceToFireStore(
         service: String,
         imgServiceUrl: String,
         imgReferenceUrls: List<String>,
