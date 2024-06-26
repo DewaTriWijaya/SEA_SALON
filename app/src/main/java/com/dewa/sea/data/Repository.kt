@@ -1,6 +1,7 @@
 package com.dewa.sea.data
 
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import com.dewa.sea.data.model.DataReservation
 import com.dewa.sea.data.model.DataReview
@@ -8,11 +9,15 @@ import com.dewa.sea.data.model.DataServices
 import com.dewa.sea.utils.SharedPreferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
+import java.util.UUID
 
 class Repository {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val storage = FirebaseStorage.getInstance()
+
     suspend fun registerUser(
         email: String,
         password: String,
@@ -245,7 +250,7 @@ class Repository {
             }
     }
 
-    fun getReview(serviceData: String, callback: (List<DataReview>) -> Unit){
+    fun getReview(serviceData: String, callback: (List<DataReview>) -> Unit) {
         val reviews = mutableListOf<DataReview>()
         fireStore.collection("reviews")
             .whereEqualTo("service", serviceData)
@@ -324,6 +329,81 @@ class Repository {
             }
             .addOnFailureListener { exception ->
                 Log.e("Repository", "Error updating document: ", exception)
+                callback(false)
+            }
+    }
+
+    fun addService(
+        service: String,
+        imgService: Uri,
+        imgReferences: List<Uri>,
+        callback: (Boolean) -> Unit
+    ) {
+        val imgServiceRef = storage.reference.child("services/$service/img_service.jpg")
+
+        imgServiceRef.putFile(imgService)
+            .addOnSuccessListener {
+                imgServiceRef.downloadUrl.addOnSuccessListener { imgServiceUri ->
+                    uploadReferences(
+                        service,
+                        imgServiceUri.toString(),
+                        imgReferences,
+                        callback
+                    )
+                }
+            }
+            .addOnFailureListener {
+                callback(false)
+            }
+    }
+
+    private fun uploadReferences(
+        service: String,
+        imgServiceUrl: String,
+        imgReferences: List<Uri>,
+        callback: (Boolean) -> Unit
+    ) {
+        val imgReferenceUrls = mutableListOf<String>()
+        imgReferences.forEachIndexed { index, uri ->
+            val imgReferenceRef = storage.reference.child("services/$service/img_reference_$index.jpg")
+            imgReferenceRef.putFile(uri)
+                .addOnSuccessListener {
+                    imgReferenceRef.downloadUrl.addOnSuccessListener { imgReferenceUri ->
+                        imgReferenceUrls.add(imgReferenceUri.toString())
+                        if (imgReferenceUrls.size == imgReferences.size) {
+                            saveServiceToFirestore(
+                                service,
+                                imgServiceUrl,
+                                imgReferenceUrls,
+                                callback
+                            )
+                        }
+                    }
+                }
+                .addOnFailureListener {
+                    callback(false)
+                }
+        }
+    }
+
+    private fun saveServiceToFirestore(
+        service: String,
+        imgServiceUrl: String,
+        imgReferenceUrls: List<String>,
+        callback: (Boolean) -> Unit
+    ) {
+        val serviceData = mapOf(
+            "service" to service,
+            "img_service" to imgServiceUrl,
+            "references" to imgReferenceUrls
+        )
+        fireStore.collection("services")
+            .document(service)
+            .set(serviceData)
+            .addOnSuccessListener {
+                callback(true)
+            }
+            .addOnFailureListener {
                 callback(false)
             }
     }

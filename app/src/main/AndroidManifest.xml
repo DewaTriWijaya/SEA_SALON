@@ -13,6 +13,9 @@
         android:theme="@style/Theme.SEASalon"
         tools:targetApi="31">
         <activity
+            android:name=".admin.ui.camera.CameraActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin.ui.service.AddServiceAdminActivity"
             android:exported="false" />
         <activity
@@ -21,8 +24,7 @@
         <activity
             android:name=".admin.AdminActivity"
             android:exported="false"
-            android:label="@string/title_activity_admin"
-            android:theme="@style/Theme.SEASalon.NoActionBar" />
+            android:label="@string/title_activity_admin" />
         <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false" />

@@ -1,8 +1,19 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.SEASalon" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="Base.Theme.SEASalon" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/yellow_dark</item>
         <item name="colorPrimaryDark">@color/red_dark</item>
         <item name="colorAccent">@color/yellow</item>
     </style>
+
+    <style name="Theme.SEASalon" parent="Base.Theme.SEASalon" />
+
+    <style name="Theme.SEASalon.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.SEASalon.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.SEASalon.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

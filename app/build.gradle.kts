@@ -54,17 +54,24 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
 
     implementation ("com.google.firebase:firebase-auth:23.0.0")
-    implementation ("com.google.firebase:firebase-firestore-ktx:24.2.1")
+    implementation ("com.google.firebase:firebase-firestore-ktx:25.0.0")
+    implementation ("com.google.firebase:firebase-storage:20.0.0")
     implementation ("com.google.android.gms:play-services-auth:21.2.0")
 
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
     implementation ("androidx.preference:preference-ktx:1.2.1")
-
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.1")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.1")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.2")
 
     implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
-    implementation ("com.google.zxing:core:3.3.3")
+    implementation ("com.google.zxing:core:3.4.1")
+
+    // Barcode scanning API
+    implementation ("com.google.mlkit:barcode-scanning:17.0.0")
+    implementation ("androidx.camera:camera-camera2:1.0.1")
+    implementation ("androidx.camera:camera-lifecycle:1.0.1")
+    implementation ("androidx.camera:camera-view:1.0.0-alpha28")
+    implementation ("com.google.guava:guava:31.0.1-android")
 }
