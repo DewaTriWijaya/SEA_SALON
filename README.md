@@ -1,3 +1,5 @@
+# Sea Salon
+
 ## Daftar Isi
 
 1. [Pendahuluan](#pendahuluan)
