@@ -21,7 +21,8 @@ Sea Salon adalah membantu pengguna untuk reservasi salon di toko kami. Aplikasi 
 ## Demo Aplikasi
 Link = https://drive.google.com/file/d/1j3RKfS0UfZ03ijZ-qgpctg5TMmCoGhki/view?usp=sharing
 
-Akun Admin = Sesuai dengan ketentuan GuideBook
+Akun Admin = Sesuai dengan ketentuan GuideBook.
+
 Akun Pelanggan = Bisa buat baru dengan register
 
 ## Library yang Digunakan
