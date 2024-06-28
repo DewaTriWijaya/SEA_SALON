@@ -4,10 +4,11 @@
 
 1. [Pendahuluan](#pendahuluan)
 2. [Penjelasan Aplikasi](#penjelasan-aplikasi)
-3. [Library yang Digunakan](#library-yang-digunakan)
-4. [Fitur Utama](#fitur-utama)
-5. [Teknologi yang Digunakan](#teknologi-yang-digunakan)
-6. [Cara Instalasi](#cara-instalasi)
+3. [Demo Aplikasi](#demo-aplikasi)
+4. [Library yang Digunakan](#library-yang-digunakan)
+5. [Fitur Utama](#fitur-utama)
+6. [Teknologi yang Digunakan](#teknologi-yang-digunakan)
+7. [Cara Instalasi](#cara-instalasi)
 
 ## Pendahuluan
 
@@ -16,6 +17,9 @@ Selamat datang di repositori aplikasi mobile Sea Salon. Aplikasi ini dirancang u
 ## Penjelasan Aplikasi
 
 Sea Salon adalah membantu pengguna untuk reservasi salon di toko kami. Aplikasi ini bertujuan untuk memudahkan pengguna ketika ingin memmotong rambut atau reservasi layanan kami. Dengan antarmuka yang mudah digunakan dan fitur yang lengkap, aplikasi ini diharapkan dapat manfaat yang diharapkan bagi pengguna.
+
+## Demo Aplikasi
+Link = [https://]
 
 ## Library yang Digunakan
 
@@ -35,28 +39,32 @@ Aplikasi ini menggunakan beberapa library berikut untuk mempermudah pengembangan
 
 Aplikasi ini dilengkapi dengan berbagai fitur, antara lain:
 
-### Fitur 1: [Home]
+### Fitur 1: [Login]
+<img src="" alt="Gambar Fitur 1" width="300">
 
+
+### Fitur 2: [Register]
+<img src="" alt="Gambar Fitur 1" width="300">
+
+### Fitur 3: [Home]
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/25bb4e4a-d70c-4097-b01b-8bda26c18eb3" alt="Gambar Fitur 1" width="300">
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/8cd38e44-db7e-4cf1-bc9a-695ab25a33c5" alt="Gambar Fitur 1" width="300">
 
-Penjelasan detail tentang fitur 1.
-
-### Fitur 2: [Reservasi]
-
-<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/a3e3b408-9b30-4126-92cf-bf3cf958aa0d" alt="Gambar Fitur 2" width="300">
+### Fitur 4: [Reservasi]
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/2c13cb84-2eb5-4817-8fe8-75a9d8b439ae" alt="Gambar Fitur 2" width="300">
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/45d4626e-9a3c-46f6-914d-6306474e6c37" alt="Gambar Fitur 2" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/a3e3b408-9b30-4126-92cf-bf3cf958aa0d" alt="Gambar Fitur 2" width="300">
 
-Penjelasan detail tentang fitur 2.
+### Fitur 5: [Alur Transaksi]
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/899a3c1d-6443-4502-b161-a101ddda2408" alt="Gambar Fitur 2" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/38876e2c-41a7-4119-bd1a-36669d83a4e7" alt="Gambar Fitur 2" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/9990651b-6107-4fe6-ac62-0e88e70348b0" alt="Gambar Fitur 2" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/e1135953-54bc-4461-91a7-a6cdac36b7ce" alt="Gambar Fitur 2" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/fd0ead9c-3d03-4367-8cf9-faf29c34f4e8" alt="Gambar Fitur 2" width="300">
 
-### Fitur 3: [Deskripsi fitur 3]
+### Fitur 4: [Profile]
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/e59285c4-bf5a-4115-83a2-052c5ddf9c43" alt="Gambar Fitur 2" width="300">
 
-![Gambar Fitur 3](path/to/image3.png)
-
-Penjelasan detail tentang fitur 3.
-
-[Fitur lainnya yang Anda miliki]
 
 ## Teknologi yang Digunakan
 
@@ -64,9 +72,8 @@ Aplikasi ini dibangun menggunakan teknologi berikut:
 
 - **Bahasa Pemrograman**: Kotlin
 - **Framework**: Android SDK
-- **Database**: Room
-- **Library Pihak Ketiga**: [Library lainnya]
-- [Teknologi lainnya yang Anda gunakan]
+- **Database**: Firebase
+- **Library Pihak Ketiga**: Glide / zking / MLKit / de.hdodenhof:circleimageview
 
 ## Cara Instalasi
 
@@ -82,10 +89,3 @@ Berikut adalah langkah-langkah untuk menginstal dan menjalankan aplikasi ini di 
     - Pilih perangkat target.
     - Klik tombol 'Run' atau gunakan shortcut `Shift + F10`.
 
-## Kontribusi
-
-Kami selalu menyambut kontribusi dari komunitas. Jika Anda tertarik untuk berkontribusi, silakan lihat [CONTRIBUTING.md](CONTRIBUTING.md) untuk panduan lebih lanjut.
-
-## Lisensi
-
-Proyek ini dilisensikan di bawah lisensi [Nama Lisensi]. Lihat file [LICENSE](LICENSE) untuk detail lebih lanjut.
