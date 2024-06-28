@@ -37,8 +37,8 @@ Aplikasi ini dilengkapi dengan berbagai fitur, antara lain:
 
 ### Fitur 1: [Home]
 
-![Gambar Fitur 1](https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/25bb4e4a-d70c-4097-b01b-8bda26c18eb3)
-![Gambar Fitur 1](https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/8cd38e44-db7e-4cf1-bc9a-695ab25a33c5)
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/25bb4e4a-d70c-4097-b01b-8bda26c18eb3" alt="Gambar Fitur 1" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/8cd38e44-db7e-4cf1-bc9a-695ab25a33c5" alt="Gambar Fitur 1" width="300">
 
 Penjelasan detail tentang fitur 1.
 
