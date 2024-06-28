@@ -53,6 +53,11 @@ Aplikasi ini dilengkapi dengan berbagai fitur, antara lain:
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/45d4626e-9a3c-46f6-914d-6306474e6c37" alt="Gambar Fitur 4" width="300">
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/a3e3b408-9b30-4126-92cf-bf3cf958aa0d" alt="Gambar Fitur 4" width="300">
 
+#### Fitur 4.1: [Review]
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/24471375-35a5-4de1-8f63-ba887a2a3c21" alt="Gambar Fitur 4.1" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/c488aafc-bfc2-4bb9-b140-a3e4b9ebd649" alt="Gambar Fitur 4.1" width="300">
+
+
 ### Fitur 5: [Alur Transaksi]
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/38876e2c-41a7-4119-bd1a-36669d83a4e7" alt="Gambar Fitur 5" width="300">
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/899a3c1d-6443-4502-b161-a101ddda2408" alt="Gambar Fitur 5" width="300">
