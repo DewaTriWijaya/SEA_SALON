@@ -25,13 +25,15 @@ Aplikasi ini menggunakan beberapa library berikut untuk mempermudah pengembangan
 - **Glide**: Untuk memuat dan menampilkan gambar.
 - **Room**: Untuk manajemen database lokal.
 - **Kotlin Coroutines**: Untuk pemrograman asynchronous.
-- **Fire Authentication**: Untuk pemrograman asynchronous.
-- **Fire Store**: Untuk pemrograman asynchronous.
-- **Fire Storage**: Untuk pemrograman asynchronous.
+- **Fire Authentication**: Untuk pengguna login dengan email/password.
+- **Fire Store**: Untuk penyimpanan data pengguna/reservation/review.
+- **Fire Storage**: Untuk penyimpanan gambar.
+- **com.google.zxing**: untuk generate QR_Barcode.
+- **MlKit Barcode Scanning**: untuk scanner barcode QR_Barcode.
   
 ## Fitur Utama
 
-Aplikasi ini dilengkapi dengan berbagai fitur utama, antara lain:
+Aplikasi ini dilengkapi dengan berbagai fitur, antara lain:
 
 ### Fitur 1: [Deskripsi fitur ]
 
