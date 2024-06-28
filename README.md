@@ -1,5 +1,3 @@
-![Facial Treatments](https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/0208dd4e-1e43-4785-a039-c8e78a2e2763)# Sea Salon
-
 ## Daftar Isi
 
 1. [Pendahuluan](#pendahuluan)
