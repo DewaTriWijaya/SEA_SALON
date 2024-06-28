@@ -29,13 +29,12 @@ Akun Pelanggan = Bisa buat baru dengan register
 
 Aplikasi ini menggunakan beberapa library berikut untuk mempermudah pengembangan dan meningkatkan performa:
 
-- **Retrofit**: Untuk komunikasi dengan API.
-- **Glide**: Untuk memuat dan menampilkan gambar.
 - **MVVM**: Untuk Arsitektur pada project android.
 - **Kotlin Coroutines**: Untuk pemrograman asynchronous.
 - **Fire Authentication**: Untuk pengguna login dengan email/password.
 - **Fire Store**: Untuk penyimpanan data pengguna/reservation/review.
 - **Fire Storage**: Untuk penyimpanan gambar.
+- **Glide**: Untuk memuat dan menampilkan gambar.
 - **com.google.zxing**: untuk generate QR_Barcode.
 - **MlKit Barcode Scanning**: untuk scanner barcode QR_Barcode.
   
