@@ -11,7 +11,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
-import java.util.UUID
 
 class Repository {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -282,7 +281,7 @@ class Repository {
             }
     }
 
-    fun checkIDStatus(reservationId: String, callback: (Boolean) -> Unit){
+    fun checkIDStatus(reservationId: String, callback: (Boolean) -> Unit) {
         fireStore.collection("reservation")
             .whereEqualTo("barcode", reservationId)
             .whereEqualTo("status", "reservation")
@@ -384,7 +383,8 @@ class Repository {
     ) {
         val imgReferenceUrls = mutableListOf<String>()
         imgReferences.forEachIndexed { index, uri ->
-            val imgReferenceRef = storage.reference.child("services/$service/img_reference_$index.jpg")
+            val imgReferenceRef =
+                storage.reference.child("services/$service/img_reference_$index.jpg")
             imgReferenceRef.putFile(uri)
                 .addOnSuccessListener {
                     imgReferenceRef.downloadUrl.addOnSuccessListener { imgReferenceUri ->

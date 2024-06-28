@@ -36,7 +36,6 @@ class AddServiceAdminActivity : AppCompatActivity() {
             imgReferenceUris.clear()
             imgReferenceUris.addAll(it)
 
-            // Update RecyclerView adapter with new URIs
             binding.rvReference.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             binding.rvReference.adapter = AddAdapterReference(imgReferenceUris.toList())
         }

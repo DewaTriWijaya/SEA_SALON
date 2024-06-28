@@ -28,9 +28,6 @@
     <string name="you_don_t_have_an_account">You don\'t have an account?</string>
     <string name="click_register">Click Register</string>
     <string name="title_activity_admin">AdminActivity</string>
-    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="scanner_qr_code">Scanner QR Code</string>
 
 </resources>

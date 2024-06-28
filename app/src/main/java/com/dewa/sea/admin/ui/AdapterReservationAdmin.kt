@@ -1,5 +1,6 @@
 package com.dewa.sea.admin.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -18,6 +19,7 @@ class AdapterReservationAdmin(
 
     inner class AdapterReservationViewHolder(private val binding: ItemCardReservationBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(item: DataReservation) {
             binding.apply {
                 tvName.text = item.nameData

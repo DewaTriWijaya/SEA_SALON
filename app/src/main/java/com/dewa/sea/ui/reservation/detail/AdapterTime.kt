@@ -93,6 +93,7 @@ class AdapterTime(
         return items.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setReservedTimes(times: List<String>) {
         reservedTimes = times
         notifyDataSetChanged()

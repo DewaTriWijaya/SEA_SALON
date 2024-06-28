@@ -5,12 +5,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.OptIn
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalGetImage
@@ -31,50 +29,29 @@ import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
 import java.util.concurrent.Executors
 
-
 class CameraActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCameraBinding
     private lateinit var previewView: PreviewView
-    private lateinit var textViewResult: TextView
-    private lateinit var buttonBack: Button
-    private lateinit var buttonNext: Button
 
     private val cameraViewModel: CameraViewModel by viewModels {
         ViewModelFactory(Repository())
     }
-
     private val cameraExecutor = Executors.newSingleThreadExecutor()
     private val barcodeScanner: BarcodeScanner = BarcodeScanning.getClient()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         previewView = findViewById(R.id.previewView)
-        textViewResult = findViewById(R.id.textViewResult)
-        buttonBack = findViewById(R.id.buttonBack)
-        buttonNext = findViewById(R.id.buttonNext)
-
-        buttonBack.setOnClickListener {
-            textViewResult.text = ""
-            buttonBack.visibility = View.GONE
-            buttonNext.visibility = View.GONE
-            previewView.visibility = View.VISIBLE
-        }
-
-        buttonNext.setOnClickListener {
-//            val intent = Intent(this, NextActivity::class.java)
-//            intent.putExtra("QR_CODE_RESULT", textViewResult.text.toString())
-//            startActivity(intent)
-        }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 100)
         } else {
             startCamera()
         }
-
     }
 
     private fun startCamera() {
@@ -92,7 +69,6 @@ class CameraActivity : AppCompatActivity() {
             }
 
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis)
@@ -118,8 +94,7 @@ class CameraActivity : AppCompatActivity() {
                                     if (isReviewed) {
                                         cameraViewModel.updateReservationStatus(rawValue, "proses") { success ->
                                             if (success) {
-                                                Toast.makeText(binding.root.context, "Status updated to proses", Toast.LENGTH_SHORT).show()
-                                                startActivity(Intent(this, AdminActivity::class.java))
+                                                showAlertDialog()
                                             } else {
                                                 Toast.makeText(binding.root.context, "Failed to update status", Toast.LENGTH_SHORT).show()
                                             }
@@ -140,6 +115,17 @@ class CameraActivity : AppCompatActivity() {
                     imageProxy.close()
                 }
         }
+    }
+
+    private fun showAlertDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Reservation Acc")
+        builder.setPositiveButton("OK") { _, _ ->
+            Toast.makeText(binding.root.context, "Status updated to proses", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, AdminActivity::class.java))
+            finish()
+        }
+        builder.show()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
