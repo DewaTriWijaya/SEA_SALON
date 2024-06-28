@@ -1,6 +1,7 @@
 package com.dewa.sea.data.model
 
 data class DataServices(
-    val imageResId: String,
-    val title: String
+    val title: String,
+    val imageService: String,
+    val imageReferences: List<String> = emptyList(),
 )

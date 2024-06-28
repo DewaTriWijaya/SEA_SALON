@@ -1,7 +1,7 @@
 package com.dewa.sea.data.model
 
 data class DataReservation(
-    val id: String,
+    var id: String,
     val nameData: String,
     val phoneData: String,
     val serviceData: String,

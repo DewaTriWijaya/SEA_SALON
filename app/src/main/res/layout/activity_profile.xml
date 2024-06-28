@@ -17,11 +17,11 @@
         app:title="Profile"
         android:background="@color/yellow_dark" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/imgProfile"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/icon_account_circle"
+        android:src="@drawable/icon_account_box"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/btnLogout"
         app:layout_constraintEnd_toEndOf="parent"

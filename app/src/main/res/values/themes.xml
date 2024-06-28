@@ -7,12 +7,14 @@
     </style>
 
     <style name="Theme.SEASalon" parent="Base.Theme.SEASalon" />
+
     <style name="Theme.SEASalon.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Theme.SEASalon.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="Theme.SEASalon.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

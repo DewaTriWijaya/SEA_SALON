@@ -1,26 +1,33 @@
 package com.dewa.sea.ui.notification.reservation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dewa.sea.data.model.DataReservation
+import com.dewa.sea.data.Repository
 import com.dewa.sea.databinding.FragmentReservationBinding
+import com.dewa.sea.data.ViewModelFactory
+import com.dewa.sea.databinding.DialogReviewBinding
 import com.dewa.sea.utils.SharedPreferences
-import com.google.firebase.firestore.FirebaseFirestore
 
-class ReservationFragment : Fragment(), AdapterReservation.OnTimeSelectedListener {
+class ReservationFragment(private val status: String) : Fragment(),
+    AdapterReservation.OnSelectedListener {
 
     private var _binding: FragmentReservationBinding? = null
     private val binding get() = _binding!!
-    private val fireStore = FirebaseFirestore.getInstance()
-    private val reservation = mutableListOf<DataReservation>()
+
     private lateinit var adapterReservation: AdapterReservation
     private lateinit var pref: SharedPreferences
+
+    private val reservationViewModel: ReservationViewModel by viewModels {
+        ViewModelFactory(Repository())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,59 +38,31 @@ class ReservationFragment : Fragment(), AdapterReservation.OnTimeSelectedListene
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        pref = SharedPreferences(requireContext())
+
         getDataReservationFromFireStore()
         recyclerviewReservation()
-        pref = SharedPreferences(this.requireContext())
+        deleteReservationFromFireStore()
     }
 
     private fun getDataReservationFromFireStore() {
-        fireStore.collection("reservation")
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val id = document.id
-                    val name = document.getString("name")
-                    val phone = document.getString("phone")
-                    val service = document.getString("service")
-                    val date = document.getString("date")
-                    val time = document.getString("time")
-                    val barcode = document.getString("barcode")
-                    val status = document.getString("status")
-
-                    Log.d("CEK", id)
-                    if (removeLastFourChars(barcode.toString()) == pref.getUid().toString()) {
-                        reservation.add(
-                            DataReservation(
-                                id,
-                                name.toString(),
-                                phone.toString(),
-                                service.toString(),
-                                date.toString(),
-                                time.toString(),
-                                barcode.toString(),
-                                status.toString()
-                            )
-                        )
-                    }
-                }
-                adapterReservation.submitList(reservation)
+        reservationViewModel.services.observe(viewLifecycleOwner) { services ->
+            services?.let { data ->
+                adapterReservation.submitList(data.filter { it.statusData == status })
+                binding.swipeRefreshLayout.isRefreshing = false
             }
-            .addOnFailureListener { e ->
-                Toast.makeText(context, "Error getting documents: ${e.message}", Toast.LENGTH_SHORT)
-                    .show()
-            }
-    }
+        }
+        val uid = pref.getUid().toString()
+        reservationViewModel.fetchServices(uid)
 
-    fun removeLastFourChars(input: String): String {
-        return if (input.length > 4) {
-            input.substring(0, input.length - 4)
-        } else {
-            input
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            reservationViewModel.fetchServices(uid)
+            recyclerviewReservation()
         }
     }
 
     private fun recyclerviewReservation() {
-        adapterReservation = AdapterReservation(this)
+        adapterReservation = AdapterReservation(this, reservationViewModel)
         binding.rvReservation.layoutManager = LinearLayoutManager(context)
         binding.rvReservation.adapter = adapterReservation
     }
@@ -93,28 +72,72 @@ class ReservationFragment : Fragment(), AdapterReservation.OnTimeSelectedListene
         _binding = null
     }
 
-    override fun onTimeSelected(id: String) {
-        deleteReservationFromFireStore(id)
+    override fun onSelected(id: String, service: String, date: String) {
+        when (status) {
+            "reservation" -> {
+                reservationViewModel.deleteReservation(id)
+            }
+
+            "proses" -> {
+                Toast.makeText(requireContext(), "Proses", Toast.LENGTH_SHORT).show()
+            }
+
+            "done" -> {
+                reservationViewModel.checkIfReviewed(id) { isReviewed ->
+                    if (isReviewed) {
+                        Toast.makeText(requireContext(), "This reservation has already been reviewed.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        reviewDialog(id, service, date)
+                        recyclerviewReservation()
+                    }
+                }
+            }
+        }
+
     }
 
-    private fun deleteReservationFromFireStore(reservation: String) {
-        //binding.progressBar.visibility = View.VISIBLE
+    private fun reviewDialog(id: String, service: String, date: String) {
+        val dialogBinding = DialogReviewBinding.inflate(layoutInflater)
+        val builder = AlertDialog.Builder(requireContext())
+            .setView(dialogBinding.root)
+            .create()
+        
+        dialogBinding.apply {
+            btnSave.setOnClickListener {
+                val rating = rating.rating.toString()
+                val review = tvReview.text.toString()
+                val name = pref.getName().toString()
 
-        fireStore.collection("reservation")
-            .document(reservation)
-            .delete()
-            .addOnSuccessListener {
-                Toast.makeText(context, "Reservation deleted successfully", Toast.LENGTH_SHORT)
-                    .show()
+                if (review.isNotEmpty()) {
+                    reservationViewModel.addReview(id, name, service, date, rating, review) { success ->
+                        if (success) {
+                            Toast.makeText(requireContext(), "Review added successfully", Toast.LENGTH_SHORT).show()
+                            builder.dismiss()
+                        } else {
+                            Toast.makeText(requireContext(), "Failed to add review", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        dialogBinding.btnClose.setOnClickListener {
+            builder.dismiss()
+        }
+        builder.show()
+    }
+
+    private fun deleteReservationFromFireStore() {
+        reservationViewModel.deleteResult.observe(viewLifecycleOwner) { result ->
+            result.onSuccess {
+                Toast.makeText(requireContext(), "Reservation deleted successfully", Toast.LENGTH_SHORT).show()
                 getDataReservationFromFireStore()
-                //binding.progressBar.visibility = View.GONE
             }
-            .addOnFailureListener { e ->
-                Toast.makeText(
-                    context,
-                    "Error deleting reservation: ${e.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+            result.onFailure { exception ->
+                Toast.makeText(requireContext(), "Failed to delete reservation: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
+        }
     }
 }

@@ -1,12 +1,15 @@
 <resources>
     <string name="app_name">SEA Salon</string>
 
-    <string name="haircut">Haircut Dan Styling Model Reference</string>
-    <string name="WEB_CLIENT_ID">826704342424-h50h3au40i61ui9dod03o00n203dqe19.apps.googleusercontent.com</string>
-    <string name="title_activity_natification_pager">NatificationPagerActivity</string>
+    <string name="model_reference">Model Reference</string>
+    <string name="title_activity_notification_pager">activity notification pager</string>
     <string name="tab_text_1">Reservation</string>
-    <string name="tab_text_2">Review</string>
+    <string name="tab_text_2">Proses</string>
     <string name="tab_text_3">History</string>
+
+    <string name="tab_admin_1">Acc</string>
+    <string name="tab_admin_2">Proses</string>
+    <string name="tab_admin_3">Done</string>
 
     <string name="home">Home</string>
     <string name="time">Time</string>
@@ -19,6 +22,12 @@
     <string name="status">Status</string>
 
     <string name="cancel">Cancel</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="you_don_t_have_an_account">You don\'t have an account?</string>
+    <string name="click_register">Click Register</string>
+    <string name="title_activity_admin">AdminActivity</string>
+    <string name="scanner_qr_code">Scanner QR Code</string>
+
 </resources>

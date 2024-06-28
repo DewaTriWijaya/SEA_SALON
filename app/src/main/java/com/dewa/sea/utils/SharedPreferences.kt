@@ -41,14 +41,6 @@ class SharedPreferences(context: Context) {
         editor.apply()
     }
 
-    fun getPhoto(): String? {
-        return sharedPreferences.getString(PHOTO, "")
-    }
-    fun setPhoto(user: String) {
-        editor.putString(PHOTO, user)
-        editor.apply()
-    }
-
     fun getPhone(): String? {
         return sharedPreferences.getString(PHONE, "")
     }
@@ -57,12 +49,20 @@ class SharedPreferences(context: Context) {
         editor.apply()
     }
 
+    fun getRole(): String? {
+        return sharedPreferences.getString(ROLE, "")
+    }
+    fun setRole(user: String) {
+        editor.putString(ROLE, user)
+        editor.apply()
+    }
+
     companion object {
         private const val THEME = "theme"
         private const val EMAIL = "email"
         private const val NAME = "name"
-        private const val PHOTO = "photo"
         private const val PHONE ="phone"
         private const val UID = "uid"
+        private const val ROLE = "role"
     }
 }

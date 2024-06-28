@@ -5,6 +5,13 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/btnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_close"
+        android:layout_gravity="end"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,6 +19,7 @@
         android:textSize="18sp" />
 
     <RatingBar
+        android:id="@+id/rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -20,6 +28,7 @@
         android:stepSize="1.0" />
 
     <EditText
+        android:id="@+id/tvReview"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/background_review"
@@ -27,6 +36,7 @@
         android:padding="8dp" />
 
     <Button
+        android:id="@+id/btnSave"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
