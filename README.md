@@ -76,7 +76,10 @@ Aplikasi ini dilengkapi dengan berbagai fitur, antara lain:
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/7c9fc2ce-cc2a-497e-b4c8-293f20ea6027" alt="Gambar Fitur 2" width="300">
 
 ### Fitur 3: [Add Layanan]
-<img src="" alt="Gambar Fitur 3" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/1725b48b-79bd-4a2d-9aee-b0112c0e8395" alt="Gambar Fitur 3" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/c1172eea-786c-4c7c-bea6-7954654d71c4" alt="Gambar Fitur 3" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/1a4b27f1-1428-4def-95f2-5eaee9672c88" alt="Gambar Fitur 3" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/1f74244a-2429-43f4-bee2-f706706a415c" alt="Gambar Fitur 3" width="300">
 
 
 ## Teknologi yang Digunakan
