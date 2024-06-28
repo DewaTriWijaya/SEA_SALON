@@ -31,7 +31,7 @@ Aplikasi ini menggunakan beberapa library berikut untuk mempermudah pengembangan
 
 - **Retrofit**: Untuk komunikasi dengan API.
 - **Glide**: Untuk memuat dan menampilkan gambar.
-- **Room**: Untuk manajemen database lokal.
+- **MVVM**: Untuk Arsitektur pada project android.
 - **Kotlin Coroutines**: Untuk pemrograman asynchronous.
 - **Fire Authentication**: Untuk pengguna login dengan email/password.
 - **Fire Store**: Untuk penyimpanan data pengguna/reservation/review.
