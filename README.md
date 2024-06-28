@@ -35,16 +35,14 @@ Aplikasi ini menggunakan beberapa library berikut untuk mempermudah pengembangan
 - **com.google.zxing**: untuk generate QR_Barcode.
 - **MlKit Barcode Scanning**: untuk scanner barcode QR_Barcode.
   
-## Fitur Utama
-
+## Fitur Pengguna
 Aplikasi ini dilengkapi dengan berbagai fitur, antara lain:
 
-### Fitur 1: [Login]
-<img src="" alt="Gambar Fitur 1" width="300">
+### Fitur 1: [Register]
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/5bb131d5-36fa-47d2-9958-2a3feb65e01d" alt="Gambar Fitur 1" width="300">
 
-
-### Fitur 2: [Register]
-<img src="" alt="Gambar Fitur 1" width="300">
+### Fitur 2: [Login]
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/61f04b78-8549-40f4-b352-e2c2722ba74d" alt="Gambar Fitur 1" width="300">
 
 ### Fitur 3: [Home]
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/25bb4e4a-d70c-4097-b01b-8bda26c18eb3" alt="Gambar Fitur 1" width="300">
@@ -56,14 +54,21 @@ Aplikasi ini dilengkapi dengan berbagai fitur, antara lain:
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/a3e3b408-9b30-4126-92cf-bf3cf958aa0d" alt="Gambar Fitur 2" width="300">
 
 ### Fitur 5: [Alur Transaksi]
-<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/899a3c1d-6443-4502-b161-a101ddda2408" alt="Gambar Fitur 2" width="300">
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/38876e2c-41a7-4119-bd1a-36669d83a4e7" alt="Gambar Fitur 2" width="300">
-<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/9990651b-6107-4fe6-ac62-0e88e70348b0" alt="Gambar Fitur 2" width="300">
-<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/e1135953-54bc-4461-91a7-a6cdac36b7ce" alt="Gambar Fitur 2" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/899a3c1d-6443-4502-b161-a101ddda2408" alt="Gambar Fitur 2" width="300">
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/fd0ead9c-3d03-4367-8cf9-faf29c34f4e8" alt="Gambar Fitur 2" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/e1135953-54bc-4461-91a7-a6cdac36b7ce" alt="Gambar Fitur 2" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/9990651b-6107-4fe6-ac62-0e88e70348b0" alt="Gambar Fitur 2" width="300">
 
 ### Fitur 4: [Profile]
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/e59285c4-bf5a-4115-83a2-052c5ddf9c43" alt="Gambar Fitur 2" width="300">
+
+## Fitur Admin
+Aplikasi ini dilengkapi dengan berbagai fitur, antara lain:
+
+### Fitur 1: [Register]
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/5bb131d5-36fa-47d2-9958-2a3feb65e01d" alt="Gambar Fitur 1" width="300">
+Aplikasi ini dilengkapi dengan berbagai fitur, antara lain:
 
 
 ## Teknologi yang Digunakan
