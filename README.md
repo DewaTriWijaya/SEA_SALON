@@ -42,9 +42,11 @@ Aplikasi ini dilengkapi dengan berbagai fitur, antara lain:
 
 Penjelasan detail tentang fitur 1.
 
-### Fitur 2: [Deskripsi fitur 2]
+### Fitur 2: [Reservasi]
 
-![Gambar Fitur 2](path/to/image2.png)
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/a3e3b408-9b30-4126-92cf-bf3cf958aa0d" alt="Gambar Fitur 2" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/2c13cb84-2eb5-4817-8fe8-75a9d8b439ae" alt="Gambar Fitur 2" width="300">
+<img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/45d4626e-9a3c-46f6-914d-6306474e6c37" alt="Gambar Fitur 2" width="300">
 
 Penjelasan detail tentang fitur 2.
 
