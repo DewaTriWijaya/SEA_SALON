@@ -35,7 +35,7 @@ Aplikasi ini menggunakan beberapa library berikut untuk mempermudah pengembangan
 
 Aplikasi ini dilengkapi dengan berbagai fitur, antara lain:
 
-### Fitur 1: [Deskripsi fitur ]
+### Fitur 1: [Home]
 
 ![Gambar Fitur 1](path/to/image1.png)
 
