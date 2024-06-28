@@ -1,4 +1,4 @@
-# Nama Aplikasi Mobile Anda
+# Sea Salon
 
 ## Daftar Isi
 
@@ -11,11 +11,11 @@
 
 ## Pendahuluan
 
-Selamat datang di repositori aplikasi mobile **Nama Aplikasi Anda**. Aplikasi ini dirancang untuk [tujuan aplikasi Anda, misalnya: membantu pengguna mengelola keuangan pribadi mereka dengan lebih baik, menyediakan informasi terkini tentang cuaca, dll.].
+Selamat datang di repositori aplikasi mobile Sea Salon. Aplikasi ini dirancang untuk membantu pengguna reservasi untuk memotong rambut atau layanan yang berada di salon kami, menyediakan informasi terkini tentang layanan salon, dll.
 
 ## Penjelasan Aplikasi
 
-**Nama Aplikasi Anda** adalah [penjelasan singkat tentang aplikasi Anda]. Aplikasi ini bertujuan untuk [tujuan utama aplikasi Anda]. Dengan antarmuka yang mudah digunakan dan fitur yang lengkap, aplikasi ini diharapkan dapat [manfaat yang diharapkan bagi pengguna].
+Sea Salon adalah membantu pengguna untuk reservasi salon di toko kami. Aplikasi ini bertujuan untuk memudahkan pengguna ketika ingin memmotong rambut atau reservasi layanan kami. Dengan antarmuka yang mudah digunakan dan fitur yang lengkap, aplikasi ini diharapkan dapat manfaat yang diharapkan bagi pengguna.
 
 ## Library yang Digunakan
 
@@ -25,13 +25,15 @@ Aplikasi ini menggunakan beberapa library berikut untuk mempermudah pengembangan
 - **Glide**: Untuk memuat dan menampilkan gambar.
 - **Room**: Untuk manajemen database lokal.
 - **Kotlin Coroutines**: Untuk pemrograman asynchronous.
-- [Library lainnya yang Anda gunakan]
-
+- **Fire Authentication**: Untuk pemrograman asynchronous.
+- **Fire Store**: Untuk pemrograman asynchronous.
+- **Fire Storage**: Untuk pemrograman asynchronous.
+  
 ## Fitur Utama
 
 Aplikasi ini dilengkapi dengan berbagai fitur utama, antara lain:
 
-### Fitur 1: [Deskripsi fitur 1]
+### Fitur 1: [Deskripsi fitur ]
 
 ![Gambar Fitur 1](path/to/image1.png)
 
