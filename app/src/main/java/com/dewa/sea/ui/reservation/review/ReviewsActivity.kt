@@ -31,7 +31,7 @@ class ReviewsActivity : AppCompatActivity() {
 
     private fun adapterReviews() {
         val services = intent.getStringExtra("SERVICE")
-        supportActionBar?.title = "Reviews $services"
+        supportActionBar?.title = "Reviews"
         reviewsViewModel.fetchReviews(services.toString())
         binding.rvReviews.layoutManager = LinearLayoutManager(this)
 
