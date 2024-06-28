@@ -21,6 +21,9 @@ Sea Salon adalah membantu pengguna untuk reservasi salon di toko kami. Aplikasi 
 ## Demo Aplikasi
 Link = https://drive.google.com/file/d/1j3RKfS0UfZ03ijZ-qgpctg5TMmCoGhki/view?usp=sharing
 
+Akun Admin = Sesuai dengan ketentuan GuideBook
+Akun Pelanggan = Bisa buat baru dengan register
+
 ## Library yang Digunakan
 
 Aplikasi ini menggunakan beberapa library berikut untuk mempermudah pengembangan dan meningkatkan performa:
@@ -49,6 +52,10 @@ Aplikasi ini dilengkapi dengan berbagai fitur, antara lain:
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/8cd38e44-db7e-4cf1-bc9a-695ab25a33c5" alt="Gambar Fitur 3" width="300">
 
 ### Fitur 4: [Reservasi]
+Batasan Fitur ini adalah:
+- Hanya bisa reservasi pada tanggal hari ini, jika jam nya belum melewati batas 1 jam lebih.
+- Kalau sudah di reservasi pada salah satu jam dan tanggal terserbut, maka orang lain tidak bisa reservasi.
+
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/2c13cb84-2eb5-4817-8fe8-75a9d8b439ae" alt="Gambar Fitur 4" width="300">
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/45d4626e-9a3c-46f6-914d-6306474e6c37" alt="Gambar Fitur 4" width="300">
 <img src="https://github.com/DewaTriWijaya/SEA_SALON/assets/73357308/a3e3b408-9b30-4126-92cf-bf3cf958aa0d" alt="Gambar Fitur 4" width="300">
