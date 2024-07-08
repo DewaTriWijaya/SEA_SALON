@@ -19,7 +19,7 @@ Selamat datang di repositori aplikasi mobile Sea Salon. Aplikasi ini dirancang u
 Sea Salon adalah membantu pengguna untuk reservasi salon di toko kami. Aplikasi ini bertujuan untuk memudahkan pengguna ketika ingin memmotong rambut atau reservasi layanan kami. Dengan antarmuka yang mudah digunakan dan fitur yang lengkap, aplikasi ini diharapkan dapat manfaat yang diharapkan bagi pengguna.
 
 ## Demo Aplikasi
-Link = https://drive.google.com/file/d/1j3RKfS0UfZ03ijZ-qgpctg5TMmCoGhki/view?usp=sharing
+----
 
 Akun Admin = Sesuai dengan ketentuan GuideBook.
 
